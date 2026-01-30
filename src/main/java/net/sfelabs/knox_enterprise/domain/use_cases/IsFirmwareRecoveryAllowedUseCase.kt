@@ -5,19 +5,12 @@ import net.sfelabs.knox.core.android.WithAndroidApplicationContext
 import net.sfelabs.knox.core.domain.usecase.base.SuspendingUseCase
 import net.sfelabs.knox.core.domain.usecase.model.ApiResult
 
-class IsFirmwareRecoveryAllowedUseCase: WithAndroidApplicationContext, SuspendingUseCase<IsFirmwareRecoveryAllowedUseCase.Params, Boolean>() {
-    class Params(val showMsg: Boolean)
+class IsFirmwareRecoveryAllowedUseCase: WithAndroidApplicationContext, SuspendingUseCase<Boolean, Boolean>() {
     private val restrictionPolicy = EnterpriseDeviceManager.getInstance(applicationContext).restrictionPolicy
 
-    suspend operator fun invoke(showMsg: Boolean = true): ApiResult<Boolean> {
-        return invoke(Params(showMsg))
-    }
-
-    override suspend fun execute(params: Params): ApiResult<Boolean> {
+    override suspend fun execute(params: Boolean): ApiResult<Boolean> {
         return ApiResult.Success(
-            restrictionPolicy.isFirmwareRecoveryAllowed(
-                params.showMsg
-            )
+            restrictionPolicy.isFirmwareRecoveryAllowed(params)
         )
     }
 }

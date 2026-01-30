@@ -6,26 +6,20 @@ import net.sfelabs.knox.core.domain.usecase.base.SuspendingUseCase
 import net.sfelabs.knox.core.domain.usecase.model.ApiResult
 import net.sfelabs.knox.core.domain.usecase.model.DefaultApiError
 
-class AllowFirmwareRecoveryUseCase: WithAndroidApplicationContext, SuspendingUseCase<AllowFirmwareRecoveryUseCase.Params, Boolean>() {
-    data class Params(val enable: Boolean)
-
+class AllowFirmwareRecoveryUseCase: WithAndroidApplicationContext, SuspendingUseCase<Boolean, Boolean>() {
     private val restrictionPolicy =
         EnterpriseDeviceManager.getInstance(applicationContext).restrictionPolicy
 
-    suspend operator fun invoke(enable: Boolean): ApiResult<Boolean> {
-        return invoke(Params(enable))
-    }
-
-    override suspend fun execute(params: Params): ApiResult<Boolean> {
-        return when (restrictionPolicy.allowFirmwareRecovery(params.enable)) {
+    override suspend fun execute(params: Boolean): ApiResult<Boolean> {
+        return when (restrictionPolicy.allowFirmwareRecovery(params)) {
             true -> {
-                ApiResult.Success(data = params.enable)
+                ApiResult.Success(data = params)
             }
 
             false -> {
                 ApiResult.Error(
                     DefaultApiError.UnexpectedError(
-                        "Failure occurred applying API allowFirmwareRecovery(${params.enable})"
+                        "Failure occurred applying API allowFirmwareRecovery($params)"
                     )
                 )
             }

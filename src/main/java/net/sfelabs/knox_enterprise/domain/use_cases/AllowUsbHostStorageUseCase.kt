@@ -6,25 +6,19 @@ import net.sfelabs.knox.core.domain.usecase.base.SuspendingUseCase
 import net.sfelabs.knox.core.domain.usecase.model.ApiResult
 import net.sfelabs.knox.core.domain.usecase.model.DefaultApiError
 
-class AllowUsbHostStorageUseCase: WithAndroidApplicationContext, SuspendingUseCase<AllowUsbHostStorageUseCase.Params, Unit>() {
-    class Params(val allow: Boolean)
-
+class AllowUsbHostStorageUseCase: WithAndroidApplicationContext, SuspendingUseCase<Boolean, Unit>() {
     private val restrictionPolicy =
         EnterpriseDeviceManager.getInstance(applicationContext)
         .restrictionPolicy
 
-    suspend fun invoke(allow: Boolean): ApiResult<Unit> {
-        return invoke(Params(allow))
-    }
-
-    override suspend fun execute(params: Params): ApiResult<Unit> {
-        val result = restrictionPolicy.allowUsbHostStorage(params.allow)
+    override suspend fun execute(params: Boolean): ApiResult<Unit> {
+        val result = restrictionPolicy.allowUsbHostStorage(params)
         return if (result)
             ApiResult.Success(Unit)
         else
             ApiResult.Error(
                 DefaultApiError.UnexpectedError(
-                    "The API allowUsbHostStorage($params.allow) failed"
+                    "The API allowUsbHostStorage($params) failed"
                 )
             )
     }
