@@ -6,26 +6,20 @@ import net.sfelabs.knox.core.domain.usecase.base.SuspendingUseCase
 import net.sfelabs.knox.core.domain.usecase.model.ApiResult
 import net.sfelabs.knox.core.domain.usecase.model.DefaultApiError
 
-class SetCCModeUseCase: WithAndroidApplicationContext, SuspendingUseCase<SetCCModeUseCase.Params, Boolean>() {
-    class Params(val enable: Boolean)
-
+class SetCCModeUseCase: WithAndroidApplicationContext, SuspendingUseCase<Boolean, Boolean>() {
     private val restrictionPolicy =
         EnterpriseKnoxManager.getInstance(applicationContext).advancedRestrictionPolicy
 
-    suspend operator fun invoke(enable: Boolean): ApiResult<Boolean> {
-        return invoke(Params(enable))
-    }
-
-    override suspend fun execute(params: Params): ApiResult<Boolean> {
-        return when (restrictionPolicy.setCCMode(params.enable)) {
+    override suspend fun execute(params: Boolean): ApiResult<Boolean> {
+        return when (restrictionPolicy.setCCMode(params)) {
             true -> {
-                ApiResult.Success(data = params.enable)
+                ApiResult.Success(data = params)
             }
 
             false -> {
                 ApiResult.Error(
                     DefaultApiError.UnexpectedError(
-                        "Failure occurred applying setCCMode(${params.enable})"
+                        "Failure occurred applying setCCMode($params)"
                     )
                 )
             }

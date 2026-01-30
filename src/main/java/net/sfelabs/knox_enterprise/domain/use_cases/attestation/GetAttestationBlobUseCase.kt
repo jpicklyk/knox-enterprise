@@ -15,19 +15,13 @@ import kotlin.coroutines.suspendCoroutine
  * Use case to wrap the asynchronous callback into sequential code since we are not attempting to
  * make an external call to a server.
  */
-class GetAttestationBlobUseCase: WithAndroidApplicationContext, SuspendingUseCase<GetAttestationBlobUseCase.Params, ByteArray>() {
-    data class Params(val nonce: String = UUID.randomUUID().toString())
-
+class GetAttestationBlobUseCase: WithAndroidApplicationContext, SuspendingUseCase<String, ByteArray>() {
     private val attestationPolicy =
         EnterpriseKnoxManager.getInstance(applicationContext).enhancedAttestationPolicy
 
-    suspend operator fun invoke(nonce: String = UUID.randomUUID().toString()): ApiResult<ByteArray> {
-        return invoke(Params(nonce))
-    }
-
-    override suspend fun execute(params: Params): ApiResult<ByteArray> {
+    override suspend fun execute(params: String): ApiResult<ByteArray> {
         return suspendCoroutine {
-            attestationPolicy.startAttestation(params.nonce, object: EnhancedAttestationPolicyCallback() {
+            attestationPolicy.startAttestation(params, object: EnhancedAttestationPolicyCallback() {
                 override fun onAttestationFinished(result: EnhancedAttestationResult) {
                     if(result.error == ERROR_NONE) {
                         it.resumeWith(Result.success(ApiResult.Success(result.blob)))

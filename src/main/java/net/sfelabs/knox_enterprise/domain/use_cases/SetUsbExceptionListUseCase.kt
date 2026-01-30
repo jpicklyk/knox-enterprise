@@ -6,23 +6,17 @@ import net.sfelabs.knox.core.domain.usecase.base.SuspendingUseCase
 import net.sfelabs.knox.core.domain.usecase.model.ApiResult
 import net.sfelabs.knox.core.domain.usecase.model.DefaultApiError
 
-class SetUsbExceptionListUseCase: WithAndroidApplicationContext, SuspendingUseCase<SetUsbExceptionListUseCase.Params, Unit>() {
-    class Params(val usbClassList: Int)
-
+class SetUsbExceptionListUseCase: WithAndroidApplicationContext, SuspendingUseCase<Int, Unit>() {
     private val restrictionPolicy =
         EnterpriseDeviceManager.getInstance(applicationContext).restrictionPolicy
 
-    suspend operator fun invoke(usbClassList: Int): ApiResult<Unit> {
-        return invoke(Params(usbClassList))
-    }
-
-    override suspend fun execute(params: Params): ApiResult<Unit> {
-        return if (restrictionPolicy.setUsbExceptionList(params.usbClassList))
+    override suspend fun execute(params: Int): ApiResult<Unit> {
+        return if (restrictionPolicy.setUsbExceptionList(params))
             ApiResult.Success(Unit)
         else
             ApiResult.Error(
                 DefaultApiError.UnexpectedError(
-                    "The API setUsbExceptionList($params.usbClassList) failed"
+                    "The API setUsbExceptionList($params) failed"
                 )
             )
     }
