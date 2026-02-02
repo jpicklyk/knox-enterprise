@@ -8,8 +8,8 @@ import net.sfelabs.knox.core.android.WithAndroidApplicationContext
 import net.sfelabs.knox.core.domain.usecase.base.SuspendingUseCase
 import net.sfelabs.knox.core.domain.usecase.model.ApiResult
 import net.sfelabs.knox.core.domain.usecase.model.DefaultApiError
-import java.util.UUID
-import kotlin.coroutines.suspendCoroutine
+import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlin.coroutines.resume
 
 /**
  * Use case to wrap the asynchronous callback into sequential code since we are not attempting to
@@ -20,21 +20,23 @@ class GetAttestationBlobUseCase: WithAndroidApplicationContext, SuspendingUseCas
         EnterpriseKnoxManager.getInstance(applicationContext).enhancedAttestationPolicy
 
     override suspend fun execute(params: String): ApiResult<ByteArray> {
-        return suspendCoroutine {
+        return suspendCancellableCoroutine { continuation ->
             attestationPolicy.startAttestation(params, object: EnhancedAttestationPolicyCallback() {
                 override fun onAttestationFinished(result: EnhancedAttestationResult) {
-                    if(result.error == ERROR_NONE) {
-                        it.resumeWith(Result.success(ApiResult.Success(result.blob)))
+                    if (!continuation.isActive) return
+
+                    if (result.error == ERROR_NONE) {
+                        continuation.resume(ApiResult.Success(result.blob))
                     } else {
-                        it.resumeWith(Result.success(
+                        continuation.resume(
                             ApiResult.Error(
                                 DefaultApiError.UnexpectedError(
                                     "Attestation error (${result.error}) was encountered with reason: ${result.reason}"
                                 )
-                            )))
+                            )
+                        )
                     }
                 }
-
             })
         }
     }
