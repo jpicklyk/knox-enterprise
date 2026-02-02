@@ -34,7 +34,7 @@ knox-enterprise wraps the Samsung Knox Enterprise SDK, providing a clean use cas
 
 ### Attestation
 
-- **Device Attestation** - Generate and validate attestation blobs
+- **Device Attestation** - Generate attestation blobs
 - **Key Generation** - Generate attestation keys
 - **Attestation Support Check** - Verify device attestation capabilities
 
@@ -107,12 +107,6 @@ val blobResult = GetAttestationBlobUseCase().invoke(
     nonce = nonceBytes,
     keyAlias = "attestation-key"
 )
-
-// Validate attestation
-val validationResult = ValidateAttestationUseCase().invoke(
-    attestationBlob = blobBytes,
-    expectedNonce = nonceBytes
-)
 ```
 
 ### With Hilt (via knox-hilt)
@@ -162,7 +156,6 @@ enum class UsbInterface {
 - `GetAttestationBlobUseCase` - Generate attestation blob
 - `IsAttestationSupportedUseCase` - Check attestation support
 - `KeyGeneratorUseCase` - Generate attestation keys
-- `ValidateAttestationUseCase` - Validate attestation blob
 
 ### Audit (`domain/use_cases/audit/`)
 - `EnableAuditLogUseCase` - Enable audit logging
