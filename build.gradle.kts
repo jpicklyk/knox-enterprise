@@ -17,6 +17,7 @@ dependencies {
     implementation(libs.androidx.annotation)
     implementation(projects.knoxCore.usecaseExecutor)
     implementation(projects.knoxCore.android)
+    implementation(projects.knoxCore.feature)
     implementation(libs.spongycastle.prov)
     implementation(libs.commons.lang)
     // Knox SDK is compileOnly - consumers must provide their own SDK JAR
