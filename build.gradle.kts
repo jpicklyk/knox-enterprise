@@ -15,6 +15,7 @@ extensions.configure<LibraryExtension> {
 
 dependencies {
     implementation(libs.androidx.annotation)
+    implementation(libs.kotlinx.coroutines.core)
     implementation(projects.knoxCore.usecaseExecutor)
     implementation(projects.knoxCore.android)
     implementation(projects.knoxCore.feature)
