@@ -1,15 +1,20 @@
-
 plugins {
-    id("sfelabs.android.feature")
+    alias(libs.plugins.convention.android.library)
 }
 
 android {
     namespace = "net.sfelabs.knox_enterprise"
+
+    lint {
+        // Disable resource prefix check for this external module
+        disable += "ResourceName"
+    }
 }
 
 dependencies {
-    implementation(project(":knox-core:usecase-executor"))
-    implementation(project(":knox-core:android"))
+    implementation(libs.androidx.annotation)
+    implementation(projects.knoxCore.usecaseExecutor)
+    implementation(projects.knoxCore.android)
     implementation(libs.spongycastle.prov)
     implementation(libs.commons.lang)
     // Knox SDK is compileOnly - consumers must provide their own SDK JAR
