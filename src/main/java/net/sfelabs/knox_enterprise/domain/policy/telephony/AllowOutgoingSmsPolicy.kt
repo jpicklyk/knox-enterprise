@@ -10,8 +10,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.telephony.AllowOutgoingSmsUs
 import net.sfelabs.knox_enterprise.domain.use_cases.telephony.IsOutgoingSmsAllowedUseCase
 
 @PolicyDefinition(
-    title = "Allow Outgoing SMS",
-    description = "Allow or disallow sending outgoing SMS messages from the device.",
+    title = "Block Outgoing SMS",
+    description = "When enabled, blocks sending outgoing SMS messages from the device.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_CALLING,

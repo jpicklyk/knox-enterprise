@@ -10,8 +10,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.security.AllowFirmwareAutoUp
 import net.sfelabs.knox_enterprise.domain.use_cases.security.IsFirmwareAutoUpdateAllowedUseCase
 
 @PolicyDefinition(
-    title = "Allow Firmware Auto Update",
-    description = "Allow or disallow automatic firmware (OS) updates.",
+    title = "Block Firmware Auto Update",
+    description = "When enabled, prevents automatic firmware (OS) updates.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_SECURITY,

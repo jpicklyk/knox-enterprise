@@ -10,8 +10,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.hardware.AllowSDCardMoveUseC
 import net.sfelabs.knox_enterprise.domain.use_cases.hardware.IsSDCardMoveAllowedUseCase
 
 @PolicyDefinition(
-    title = "Allow SD Card Move",
-    description = "Allow or disallow moving applications and data to the SD card.",
+    title = "Block SD Card Move",
+    description = "When enabled, prevents moving applications and data to the SD card.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_HARDWARE

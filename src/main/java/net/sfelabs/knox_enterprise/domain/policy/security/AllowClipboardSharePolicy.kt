@@ -10,8 +10,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.security.AllowClipboardShare
 import net.sfelabs.knox_enterprise.domain.use_cases.security.IsClipboardShareAllowedUseCase
 
 @PolicyDefinition(
-    title = "Allow Clipboard Share",
-    description = "Allow or disallow sharing clipboard content between applications.",
+    title = "Block Clipboard Sharing",
+    description = "When enabled, prevents sharing clipboard content between applications.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_SECURITY,

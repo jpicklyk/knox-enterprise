@@ -10,8 +10,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.AllowNfcStateCh
 import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.IsNfcStateChangeAllowedUseCase
 
 @PolicyDefinition(
-    title = "Allow NFC State Change",
-    description = "Allow or disallow the user from changing the NFC on/off state.",
+    title = "Block NFC State Change",
+    description = "When enabled, prevents users from changing the NFC on/off state.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_NETWORK,

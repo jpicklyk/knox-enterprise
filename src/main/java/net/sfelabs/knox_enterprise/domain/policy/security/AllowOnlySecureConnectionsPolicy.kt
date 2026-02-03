@@ -10,8 +10,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.security.AllowOnlySecureConn
 import net.sfelabs.knox_enterprise.domain.use_cases.security.IsOnlySecureConnectionsAllowedUseCase
 
 @PolicyDefinition(
-    title = "Allow Only Secure Connections",
-    description = "Require all network connections to use secure protocols (HTTPS, TLS).",
+    title = "Require Secure Connections",
+    description = "When enabled, requires all network connections to use secure protocols (HTTPS, TLS).",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_SECURITY,

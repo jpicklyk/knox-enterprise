@@ -10,8 +10,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.media.AllowVideoRecordUseCas
 import net.sfelabs.knox_enterprise.domain.use_cases.media.IsVideoRecordAllowedUseCase
 
 @PolicyDefinition(
-    title = "Allow Video Recording",
-    description = "Allow or disallow video recording on the device.",
+    title = "Block Video Recording",
+    description = "When enabled, blocks video recording on the device.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_HARDWARE,

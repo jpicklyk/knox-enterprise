@@ -10,8 +10,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.telephony.AllowCallerIdDispl
 import net.sfelabs.knox_enterprise.domain.use_cases.telephony.IsCallerIdDisplayAllowedUseCase
 
 @PolicyDefinition(
-    title = "Allow Caller ID Display",
-    description = "Allow or disallow displaying caller ID for incoming calls.",
+    title = "Block Caller ID Display",
+    description = "When enabled, hides caller ID for incoming calls.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_CALLING,

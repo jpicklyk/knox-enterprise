@@ -10,8 +10,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.AllowOpenWifiAp
 import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.IsOpenWifiApAllowedUseCase
 
 @PolicyDefinition(
-    title = "Allow Open WiFi AP",
-    description = "Allow or disallow the creation of open (unsecured) WiFi access points.",
+    title = "Block Open WiFi AP",
+    description = "When enabled, prevents creation of open (unsecured) WiFi access points.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_WIFI,

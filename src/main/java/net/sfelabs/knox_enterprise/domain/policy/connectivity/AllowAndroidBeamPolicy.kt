@@ -10,8 +10,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.AllowAndroidBea
 import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.IsAndroidBeamAllowedUseCase
 
 @PolicyDefinition(
-    title = "Allow Android Beam",
-    description = "Allow or disallow the user from using Android Beam for NFC-based data transfer.",
+    title = "Disable Android Beam",
+    description = "When enabled, disables Android Beam NFC-based data transfer functionality.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_NETWORK,

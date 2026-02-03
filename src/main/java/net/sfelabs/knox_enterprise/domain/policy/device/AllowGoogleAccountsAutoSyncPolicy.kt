@@ -10,8 +10,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.device.AllowGoogleAccountsAu
 import net.sfelabs.knox_enterprise.domain.use_cases.device.IsGoogleAccountsAutoSyncAllowedUseCase
 
 @PolicyDefinition(
-    title = "Allow Google Accounts Auto Sync",
-    description = "Allow or disallow automatic syncing of Google accounts on the device.",
+    title = "Block Google Accounts Auto Sync",
+    description = "When enabled, prevents automatic syncing of Google accounts on the device.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_NETWORK,

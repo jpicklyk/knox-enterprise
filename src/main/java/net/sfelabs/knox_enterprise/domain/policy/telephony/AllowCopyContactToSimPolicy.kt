@@ -10,8 +10,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.telephony.AllowCopyContactTo
 import net.sfelabs.knox_enterprise.domain.use_cases.telephony.IsCopyContactToSimAllowedUseCase
 
 @PolicyDefinition(
-    title = "Allow Copy Contact To SIM",
-    description = "Allow or disallow copying contacts to the SIM card.",
+    title = "Block Copy Contact To SIM",
+    description = "When enabled, prevents copying contacts to the SIM card.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_CALLING,

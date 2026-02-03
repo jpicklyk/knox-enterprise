@@ -10,8 +10,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.device.AllowDataSavingUseCas
 import net.sfelabs.knox_enterprise.domain.use_cases.device.IsDataSavingAllowedUseCase
 
 @PolicyDefinition(
-    title = "Allow Data Saving",
-    description = "Allow or disallow the user from enabling the Data Saver feature.",
+    title = "Block Data Saving Mode",
+    description = "When enabled, prevents users from enabling the Data Saver feature.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_NETWORK,

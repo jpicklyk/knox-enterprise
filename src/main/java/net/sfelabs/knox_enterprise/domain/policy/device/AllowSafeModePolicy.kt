@@ -10,8 +10,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.device.AllowSafeModeUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.device.IsSafeModeAllowedUseCase
 
 @PolicyDefinition(
-    title = "Allow Safe Mode",
-    description = "Allow or disallow the user from booting the device into safe mode.",
+    title = "Block Safe Mode",
+    description = "When enabled, prevents users from booting the device into safe mode.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_SECURITY,

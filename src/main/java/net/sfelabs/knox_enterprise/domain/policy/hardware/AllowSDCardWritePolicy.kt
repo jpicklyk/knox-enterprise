@@ -10,8 +10,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.hardware.AllowSDCardWriteUse
 import net.sfelabs.knox_enterprise.domain.use_cases.hardware.IsSDCardWriteAllowedUseCase
 
 @PolicyDefinition(
-    title = "Allow SD Card Write",
-    description = "Allow or disallow writing data to the SD card.",
+    title = "Block SD Card Write",
+    description = "When enabled, prevents writing data to the SD card.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_HARDWARE,

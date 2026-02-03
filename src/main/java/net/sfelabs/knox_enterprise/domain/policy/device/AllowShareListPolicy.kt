@@ -10,8 +10,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.device.AllowShareListUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.device.IsShareListAllowedUseCase
 
 @PolicyDefinition(
-    title = "Allow Share List",
-    description = "Allow or disallow the display of the Share Via list when sharing content.",
+    title = "Block Share List",
+    description = "When enabled, hides the Share Via list when sharing content.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_SECURITY,

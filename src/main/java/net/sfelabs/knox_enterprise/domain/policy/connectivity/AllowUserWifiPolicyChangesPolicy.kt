@@ -10,8 +10,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.GetAllowUserWif
 import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.SetAllowUserWifiPolicyChangesUseCase
 
 @PolicyDefinition(
-    title = "Allow User WiFi Policy Changes",
-    description = "Allow or disallow the user from changing enterprise WiFi policy settings.",
+    title = "Block User WiFi Policy Changes",
+    description = "When enabled, prevents users from changing enterprise WiFi policy settings.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_WIFI,

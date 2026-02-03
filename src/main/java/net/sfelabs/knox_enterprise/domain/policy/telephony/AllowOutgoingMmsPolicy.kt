@@ -10,8 +10,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.telephony.AllowOutgoingMmsUs
 import net.sfelabs.knox_enterprise.domain.use_cases.telephony.IsOutgoingMmsAllowedUseCase
 
 @PolicyDefinition(
-    title = "Allow Outgoing MMS",
-    description = "Allow or disallow sending outgoing MMS messages from the device.",
+    title = "Block Outgoing MMS",
+    description = "When enabled, blocks sending outgoing MMS messages from the device.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_CALLING,

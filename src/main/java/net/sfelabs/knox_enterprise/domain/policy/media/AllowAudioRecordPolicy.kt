@@ -10,8 +10,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.media.AllowAudioRecordUseCas
 import net.sfelabs.knox_enterprise.domain.use_cases.media.IsAudioRecordAllowedUseCase
 
 @PolicyDefinition(
-    title = "Allow Audio Recording",
-    description = "Allow or disallow audio recording on the device.",
+    title = "Block Audio Recording",
+    description = "When enabled, blocks audio recording on the device.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_AUDIO,

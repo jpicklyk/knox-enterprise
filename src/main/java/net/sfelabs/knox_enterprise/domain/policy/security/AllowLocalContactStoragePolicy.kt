@@ -10,8 +10,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.security.AllowLocalContactSt
 import net.sfelabs.knox_enterprise.domain.use_cases.security.IsLocalContactStorageAllowedUseCase
 
 @PolicyDefinition(
-    title = "Allow Local Contact Storage",
-    description = "Allow or disallow storing contacts locally on the device.",
+    title = "Block Local Contact Storage",
+    description = "When enabled, prevents storing contacts locally on the device.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_SECURITY,

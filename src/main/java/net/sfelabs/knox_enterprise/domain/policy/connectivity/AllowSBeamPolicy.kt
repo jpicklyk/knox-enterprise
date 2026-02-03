@@ -10,8 +10,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.AllowSBeamUseCa
 import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.IsSBeamAllowedUseCase
 
 @PolicyDefinition(
-    title = "Allow S Beam",
-    description = "Allow or disallow the user from using Samsung S Beam for NFC-based data transfer.",
+    title = "Disable S Beam",
+    description = "When enabled, disables Samsung S Beam NFC-based data transfer functionality.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_NETWORK,

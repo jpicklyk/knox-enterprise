@@ -10,8 +10,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.AllowWifiScanni
 import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.IsWifiScanningAllowedUseCase
 
 @PolicyDefinition(
-    title = "Allow WiFi Scanning",
-    description = "Allow or disallow WiFi scanning for network discovery.",
+    title = "Block WiFi Scanning",
+    description = "When enabled, blocks WiFi scanning for network discovery.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_WIFI,

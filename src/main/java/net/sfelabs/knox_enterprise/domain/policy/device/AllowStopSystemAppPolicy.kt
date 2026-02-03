@@ -10,8 +10,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.device.AllowStopSystemAppUse
 import net.sfelabs.knox_enterprise.domain.use_cases.device.IsStopSystemAppAllowedUseCase
 
 @PolicyDefinition(
-    title = "Allow Stop System App",
-    description = "Allow or disallow the user from force stopping system applications.",
+    title = "Block Stop System App",
+    description = "When enabled, prevents users from force stopping system applications.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_SECURITY

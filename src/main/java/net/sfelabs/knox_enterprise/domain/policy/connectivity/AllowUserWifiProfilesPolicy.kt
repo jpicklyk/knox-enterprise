@@ -10,8 +10,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.GetAllowUserWif
 import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.SetAllowUserWifiProfilesUseCase
 
 @PolicyDefinition(
-    title = "Allow User WiFi Profiles",
-    description = "Allow or disallow the user from creating and modifying WiFi network profiles.",
+    title = "Block User WiFi Profiles",
+    description = "When enabled, prevents users from creating and modifying WiFi network profiles.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_WIFI,

@@ -10,8 +10,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.AllowWifiApSett
 import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.IsWifiApSettingModificationAllowedUseCase
 
 @PolicyDefinition(
-    title = "Allow WiFi AP Setting Modification",
-    description = "Allow or disallow the user from modifying WiFi access point settings.",
+    title = "Block WiFi AP Setting Modification",
+    description = "When enabled, prevents users from modifying WiFi access point settings.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_WIFI

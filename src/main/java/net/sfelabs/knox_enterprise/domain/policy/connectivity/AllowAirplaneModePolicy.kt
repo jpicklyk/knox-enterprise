@@ -10,8 +10,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.AllowAirplaneMo
 import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.IsAirplaneModeAllowedUseCase
 
 @PolicyDefinition(
-    title = "Allow Airplane Mode",
-    description = "Allow or disallow the user from enabling airplane mode on the device.",
+    title = "Block Airplane Mode",
+    description = "When enabled, prevents users from toggling airplane mode on the device.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_RADIO,

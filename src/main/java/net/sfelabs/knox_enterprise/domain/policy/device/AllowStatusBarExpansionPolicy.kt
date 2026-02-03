@@ -10,8 +10,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.device.AllowStatusBarExpansi
 import net.sfelabs.knox_enterprise.domain.use_cases.device.IsStatusBarExpansionAllowedUseCase
 
 @PolicyDefinition(
-    title = "Allow Status Bar Expansion",
-    description = "Allow or disallow the user from expanding the notification panel.",
+    title = "Block Status Bar Expansion",
+    description = "When enabled, prevents users from expanding the notification panel.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_DISPLAY,

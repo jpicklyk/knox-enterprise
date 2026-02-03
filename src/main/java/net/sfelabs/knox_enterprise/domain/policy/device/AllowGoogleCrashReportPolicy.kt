@@ -10,8 +10,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.device.AllowGoogleCrashRepor
 import net.sfelabs.knox_enterprise.domain.use_cases.device.IsGoogleCrashReportAllowedUseCase
 
 @PolicyDefinition(
-    title = "Allow Google Crash Report",
-    description = "Allow or disallow sending crash reports to Google from the device.",
+    title = "Block Google Crash Reports",
+    description = "When enabled, prevents sending crash reports to Google from the device.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_NETWORK,

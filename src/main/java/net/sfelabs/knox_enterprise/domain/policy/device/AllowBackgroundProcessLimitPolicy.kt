@@ -10,8 +10,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.device.AllowBackgroundProces
 import net.sfelabs.knox_enterprise.domain.use_cases.device.IsBackgroundProcessLimitAllowedUseCase
 
 @PolicyDefinition(
-    title = "Allow Background Process Limit",
-    description = "Allow or disallow the user from setting background process limits in developer options.",
+    title = "Block Background Process Limit",
+    description = "When enabled, prevents users from setting background process limits in developer options.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_HARDWARE,

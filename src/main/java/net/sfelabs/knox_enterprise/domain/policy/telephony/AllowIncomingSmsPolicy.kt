@@ -10,8 +10,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.telephony.AllowIncomingSmsUs
 import net.sfelabs.knox_enterprise.domain.use_cases.telephony.IsIncomingSmsAllowedUseCase
 
 @PolicyDefinition(
-    title = "Allow Incoming SMS",
-    description = "Allow or disallow receiving incoming SMS messages on the device.",
+    title = "Block Incoming SMS",
+    description = "When enabled, blocks receiving incoming SMS messages on the device.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_CALLING,

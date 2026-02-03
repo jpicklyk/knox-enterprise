@@ -10,8 +10,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.device.AllowPowerOffUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.device.IsPowerOffAllowedUseCase
 
 @PolicyDefinition(
-    title = "Allow Power Off",
-    description = "Allow or disallow the user from powering off the device using the power button.",
+    title = "Block Power Off",
+    description = "When enabled, prevents users from powering off the device using the power button.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_HARDWARE,

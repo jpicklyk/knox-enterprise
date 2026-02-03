@@ -18,8 +18,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.device.IsIntelligenceOnlineP
  * When disabled, AI features requiring cloud processing will be blocked.
  */
 @PolicyDefinition(
-    title = "Allow Intelligence Online Processing",
-    description = "Allow or disallow AI/Intelligence features from processing data in the cloud. Disabling blocks cloud-based AI features like Google Gemini.",
+    title = "Block Intelligence Online Processing",
+    description = "When enabled, blocks AI/Intelligence features from processing data in the cloud, including Google Gemini and Samsung AI features.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_SECURITY,

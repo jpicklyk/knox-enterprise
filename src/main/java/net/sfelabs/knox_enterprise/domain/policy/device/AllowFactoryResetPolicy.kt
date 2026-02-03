@@ -10,8 +10,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.device.AllowFactoryResetUseC
 import net.sfelabs.knox_enterprise.domain.use_cases.device.IsFactoryResetAllowedUseCase
 
 @PolicyDefinition(
-    title = "Allow Factory Reset",
-    description = "Allow or disallow the user from performing a factory reset on the device.",
+    title = "Block Factory Reset",
+    description = "When enabled, prevents users from performing a factory reset on the device.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_SECURITY,

@@ -10,8 +10,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.device.AllowSettingsChangesU
 import net.sfelabs.knox_enterprise.domain.use_cases.device.IsSettingsChangesAllowedUseCase
 
 @PolicyDefinition(
-    title = "Allow Settings Changes",
-    description = "Allow or deny the user access to the Settings application.",
+    title = "Block Settings Changes",
+    description = "When enabled, denies user access to the Settings application.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_SECURITY,

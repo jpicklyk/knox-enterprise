@@ -10,8 +10,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.device.AllowDeveloperModeUse
 import net.sfelabs.knox_enterprise.domain.use_cases.device.IsDeveloperModeAllowedUseCase
 
 @PolicyDefinition(
-    title = "Allow Developer Mode",
-    description = "Allow or disallow the user from enabling developer options on the device.",
+    title = "Block Developer Mode",
+    description = "When enabled, prevents users from enabling developer options on the device.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_SECURITY,

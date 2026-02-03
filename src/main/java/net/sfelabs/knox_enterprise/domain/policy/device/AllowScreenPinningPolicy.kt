@@ -10,8 +10,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.device.AllowScreenPinningUse
 import net.sfelabs.knox_enterprise.domain.use_cases.device.IsScreenPinningAllowedUseCase
 
 @PolicyDefinition(
-    title = "Allow Screen Pinning",
-    description = "Allow or disallow the user from using the screen pinning feature.",
+    title = "Block Screen Pinning",
+    description = "When enabled, prevents users from using the screen pinning feature.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_DISPLAY,

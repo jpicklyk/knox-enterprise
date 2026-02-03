@@ -10,8 +10,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.AllowUserMobile
 import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.IsUserMobileDataLimitAllowedUseCase
 
 @PolicyDefinition(
-    title = "Allow User Mobile Data Limit",
-    description = "Allow or disallow the user from setting mobile data usage limits.",
+    title = "Block User Mobile Data Limit",
+    description = "When enabled, prevents users from setting mobile data usage limits.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_RADIO,

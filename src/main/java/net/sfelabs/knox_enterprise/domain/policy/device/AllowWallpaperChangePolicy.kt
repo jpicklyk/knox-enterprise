@@ -10,8 +10,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.device.AllowWallpaperChangeU
 import net.sfelabs.knox_enterprise.domain.use_cases.device.IsWallpaperChangeAllowedUseCase
 
 @PolicyDefinition(
-    title = "Allow Wallpaper Change",
-    description = "Allow or disallow the user from changing the device wallpaper.",
+    title = "Block Wallpaper Change",
+    description = "When enabled, prevents users from changing the device wallpaper.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_DISPLAY,

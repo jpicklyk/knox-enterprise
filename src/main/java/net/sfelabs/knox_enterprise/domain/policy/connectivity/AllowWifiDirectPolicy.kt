@@ -10,8 +10,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.AllowWifiDirect
 import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.IsWifiDirectAllowedUseCase
 
 @PolicyDefinition(
-    title = "Allow WiFi Direct",
-    description = "Allow or disallow the user from using WiFi Direct for peer-to-peer connections.",
+    title = "Disable WiFi Direct",
+    description = "When enabled, disables WiFi Direct peer-to-peer connection functionality.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_WIFI,

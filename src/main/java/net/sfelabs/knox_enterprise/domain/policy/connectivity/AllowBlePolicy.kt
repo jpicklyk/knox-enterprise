@@ -10,8 +10,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.AllowBleUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.IsBleAllowedUseCase
 
 @PolicyDefinition(
-    title = "Allow BLE",
-    description = "Allow or disallow Bluetooth Low Energy (BLE) functionality.",
+    title = "Disable BLE",
+    description = "When enabled, disables Bluetooth Low Energy (BLE) functionality.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_BLUETOOTH,

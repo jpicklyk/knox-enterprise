@@ -10,8 +10,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.device.AllowSmartClipModeUse
 import net.sfelabs.knox_enterprise.domain.use_cases.device.IsSmartClipModeAllowedUseCase
 
 @PolicyDefinition(
-    title = "Allow Smart Clip Mode",
-    description = "Allow or disallow the stylus smart clip feature on the device.",
+    title = "Block Smart Clip Mode",
+    description = "When enabled, disables the stylus smart clip feature on the device.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_HARDWARE,

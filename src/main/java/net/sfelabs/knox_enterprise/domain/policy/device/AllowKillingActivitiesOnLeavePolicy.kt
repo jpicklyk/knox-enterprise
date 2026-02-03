@@ -10,8 +10,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.device.AllowKillingActivitie
 import net.sfelabs.knox_enterprise.domain.use_cases.device.IsKillingActivitiesOnLeaveAllowedUseCase
 
 @PolicyDefinition(
-    title = "Allow Killing Activities On Leave",
-    description = "Allow or disallow the system from killing activities when the user leaves them.",
+    title = "Block Killing Activities On Leave",
+    description = "When enabled, prevents the system from killing activities when the user leaves them.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_HARDWARE

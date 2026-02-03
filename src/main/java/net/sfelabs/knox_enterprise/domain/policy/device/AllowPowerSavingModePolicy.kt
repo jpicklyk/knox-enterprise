@@ -10,8 +10,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.device.AllowPowerSavingModeU
 import net.sfelabs.knox_enterprise.domain.use_cases.device.IsPowerSavingModeAllowedUseCase
 
 @PolicyDefinition(
-    title = "Allow Power Saving Mode",
-    description = "Allow or disallow the user from enabling power saving mode on the device.",
+    title = "Block Power Saving Mode",
+    description = "When enabled, prevents users from enabling power saving mode on the device.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_HARDWARE,

@@ -10,8 +10,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.telephony.AllowIncomingMmsUs
 import net.sfelabs.knox_enterprise.domain.use_cases.telephony.IsIncomingMmsAllowedUseCase
 
 @PolicyDefinition(
-    title = "Allow Incoming MMS",
-    description = "Allow or disallow receiving incoming MMS messages on the device.",
+    title = "Block Incoming MMS",
+    description = "When enabled, blocks receiving incoming MMS messages on the device.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_CALLING,
