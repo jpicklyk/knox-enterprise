@@ -14,7 +14,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.datetime.IsDateTimeChangeAll
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_SECURITY,
-        PolicyCapability.EASILY_REVERSIBLE
+        PolicyCapability.EASILY_REVERSIBLE,
+        PolicyCapability.STIG
     ]
 )
 class DateTimeChangePolicy : BooleanStatePolicy() {

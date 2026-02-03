@@ -15,7 +15,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.display.SetStatusBarNotifica
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_DISPLAY,
-        PolicyCapability.EASILY_REVERSIBLE
+        PolicyCapability.EASILY_REVERSIBLE,
+        PolicyCapability.STIG
     ]
 )
 class StatusBarNotificationsPolicy : BooleanStatePolicy() {

@@ -16,7 +16,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.IsWifiDirectAll
     capabilities = [
         PolicyCapability.MODIFIES_WIFI,
         PolicyCapability.AFFECTS_CONNECTIVITY,
-        PolicyCapability.EASILY_REVERSIBLE
+        PolicyCapability.EASILY_REVERSIBLE,
+        PolicyCapability.STIG
     ]
 )
 class AllowWifiDirectPolicy : BooleanStatePolicy() {

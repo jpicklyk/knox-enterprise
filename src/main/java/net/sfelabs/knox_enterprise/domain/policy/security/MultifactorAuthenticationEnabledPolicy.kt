@@ -15,7 +15,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.security.SetMultifactorAuthe
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_SECURITY,
-        PolicyCapability.SECURITY_SENSITIVE
+        PolicyCapability.SECURITY_SENSITIVE,
+        PolicyCapability.STIG
     ]
 )
 class MultifactorAuthenticationEnabledPolicy : BooleanStatePolicy() {

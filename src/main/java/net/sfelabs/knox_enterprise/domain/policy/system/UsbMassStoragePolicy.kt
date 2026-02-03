@@ -14,7 +14,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.system.SetUsbMassStorageStat
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_HARDWARE,
-        PolicyCapability.SECURITY_SENSITIVE
+        PolicyCapability.SECURITY_SENSITIVE,
+        PolicyCapability.STIG
     ]
 )
 class UsbMassStoragePolicy : BooleanStatePolicy() {

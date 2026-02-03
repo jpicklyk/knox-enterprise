@@ -16,7 +16,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.SetBluetoothEna
     capabilities = [
         PolicyCapability.MODIFIES_BLUETOOTH,
         PolicyCapability.AFFECTS_CONNECTIVITY,
-        PolicyCapability.EASILY_REVERSIBLE
+        PolicyCapability.EASILY_REVERSIBLE,
+        PolicyCapability.STIG
     ]
 )
 class BluetoothEnabledPolicy : BooleanStatePolicy() {

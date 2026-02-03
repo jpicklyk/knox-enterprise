@@ -16,7 +16,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.media.SetCameraEnabledUseCas
     capabilities = [
         PolicyCapability.MODIFIES_HARDWARE,
         PolicyCapability.SECURITY_SENSITIVE,
-        PolicyCapability.EASILY_REVERSIBLE
+        PolicyCapability.EASILY_REVERSIBLE,
+        PolicyCapability.STIG
     ]
 )
 class CameraEnabledPolicy : BooleanStatePolicy() {

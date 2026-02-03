@@ -15,7 +15,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.SetWifiTetherin
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_WIFI,
-        PolicyCapability.AFFECTS_CONNECTIVITY
+        PolicyCapability.AFFECTS_CONNECTIVITY,
+        PolicyCapability.STIG
     ]
 )
 class WifiTetheringEnabledPolicy : BooleanStatePolicy() {

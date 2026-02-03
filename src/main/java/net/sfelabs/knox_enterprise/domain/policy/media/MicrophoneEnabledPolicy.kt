@@ -17,7 +17,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.media.SetMicrophoneEnabledUs
         PolicyCapability.MODIFIES_HARDWARE,
         PolicyCapability.MODIFIES_AUDIO,
         PolicyCapability.SECURITY_SENSITIVE,
-        PolicyCapability.EASILY_REVERSIBLE
+        PolicyCapability.EASILY_REVERSIBLE,
+        PolicyCapability.STIG
     ]
 )
 class MicrophoneEnabledPolicy : BooleanStatePolicy() {

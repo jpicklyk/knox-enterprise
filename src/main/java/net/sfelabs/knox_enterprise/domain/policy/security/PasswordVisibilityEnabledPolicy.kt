@@ -15,7 +15,8 @@ import net.sfelabs.knox_enterprise.domain.use_cases.security.SetPasswordVisibili
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_SECURITY,
-        PolicyCapability.MODIFIES_DISPLAY
+        PolicyCapability.MODIFIES_DISPLAY,
+        PolicyCapability.STIG
     ]
 )
 class PasswordVisibilityEnabledPolicy : BooleanStatePolicy() {
