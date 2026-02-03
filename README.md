@@ -118,11 +118,23 @@ knox-enterprise follows a DI-agnostic architecture:
 ├─────────────────────────────────────────────────────────┤
 │  knox-enterprise (this module)                          │
 │  ├── domain/use_cases/  - Business logic                │
-│  └── domain/model/      - Domain models                 │
+│  ├── domain/policy/     - Policy implementations        │
+│  └── generated/         - KSP-generated components      │
 ├─────────────────────────────────────────────────────────┤
 │  knox-core              - Shared infrastructure         │
 └─────────────────────────────────────────────────────────┘
 ```
+
+### Generated Code
+
+The `feature-processor` KSP plugin generates DI-agnostic code from `@PolicyDefinition` annotations:
+
+- **`GeneratedPolicyComponents`** - Registry object with `getAll()` returning all policy components
+- **`*Component`** - `PolicyComponent<T>` implementations for each policy
+- **`*Key`** - Type-safe policy keys for registry lookup
+- **`PolicyType`** - Sealed interface for exhaustive pattern matching
+
+The generated code has **no DI framework dependencies**. DI integration is handled by separate modules (e.g., knox-hilt for Hilt users).
 
 ## Usage
 
