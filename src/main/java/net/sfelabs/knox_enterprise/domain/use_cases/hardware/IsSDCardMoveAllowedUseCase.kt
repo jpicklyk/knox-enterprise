@@ -11,6 +11,6 @@ class IsSDCardMoveAllowedUseCase : WithAndroidApplicationContext, SuspendingUseC
     }
 
     override suspend fun execute(params: Unit): ApiResult<Boolean> {
-        return ApiResult.Success(data = restrictionPolicy.isSDCardMoveAllowed(true))
+        return ApiResult.Success(data = restrictionPolicy.isSDCardMoveAllowed(false))
     }
 }

@@ -11,6 +11,6 @@ class IsFirmwareAutoUpdateAllowedUseCase : WithAndroidApplicationContext, Suspen
     }
 
     override suspend fun execute(params: Unit): ApiResult<Boolean> {
-        return ApiResult.Success(data = advancedRestrictionPolicy.isFirmwareAutoUpdateAllowed(true))
+        return ApiResult.Success(data = advancedRestrictionPolicy.isFirmwareAutoUpdateAllowed(false))
     }
 }
