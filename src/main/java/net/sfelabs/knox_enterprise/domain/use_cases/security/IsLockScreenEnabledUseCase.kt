@@ -11,6 +11,6 @@ class IsLockScreenEnabledUseCase : WithAndroidApplicationContext, SuspendingUseC
     }
 
     override suspend fun execute(params: Unit): ApiResult<Boolean> {
-        return ApiResult.Success(data = restrictionPolicy.isLockScreenEnabled(true))
+        return ApiResult.Success(data = restrictionPolicy.isLockScreenEnabled(false))
     }
 }

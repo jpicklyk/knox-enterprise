@@ -11,6 +11,6 @@ class IsUsbMediaPlayerAvailableUseCase : WithAndroidApplicationContext, Suspendi
     }
 
     override suspend fun execute(params: Unit): ApiResult<Boolean> {
-        return ApiResult.Success(data = restrictionPolicy.isUsbMediaPlayerAvailable(true))
+        return ApiResult.Success(data = restrictionPolicy.isUsbMediaPlayerAvailable(false))
     }
 }

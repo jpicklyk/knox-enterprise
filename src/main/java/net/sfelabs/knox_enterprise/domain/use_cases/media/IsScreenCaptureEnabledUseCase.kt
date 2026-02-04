@@ -11,6 +11,6 @@ class IsScreenCaptureEnabledUseCase : WithAndroidApplicationContext, SuspendingU
     }
 
     override suspend fun execute(params: Unit): ApiResult<Boolean> {
-        return ApiResult.Success(data = restrictionPolicy.isScreenCaptureEnabled(true))
+        return ApiResult.Success(data = restrictionPolicy.isScreenCaptureEnabled(false))
     }
 }

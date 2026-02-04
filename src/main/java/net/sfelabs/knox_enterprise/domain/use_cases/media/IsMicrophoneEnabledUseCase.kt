@@ -11,6 +11,6 @@ class IsMicrophoneEnabledUseCase : WithAndroidApplicationContext, SuspendingUseC
     }
 
     override suspend fun execute(params: Unit): ApiResult<Boolean> {
-        return ApiResult.Success(data = restrictionPolicy.isMicrophoneEnabled(true))
+        return ApiResult.Success(data = restrictionPolicy.isMicrophoneEnabled(false))
     }
 }

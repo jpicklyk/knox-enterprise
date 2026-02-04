@@ -11,6 +11,6 @@ class IsBluetoothEnabledUseCase : WithAndroidApplicationContext, SuspendingUseCa
     }
 
     override suspend fun execute(params: Unit): ApiResult<Boolean> {
-        return ApiResult.Success(data = restrictionPolicy.isBluetoothEnabled(true))
+        return ApiResult.Success(data = restrictionPolicy.isBluetoothEnabled(false))
     }
 }

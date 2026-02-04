@@ -11,6 +11,6 @@ class IsHeadphoneEnabledUseCase : WithAndroidApplicationContext, SuspendingUseCa
     }
 
     override suspend fun execute(params: Unit): ApiResult<Boolean> {
-        return ApiResult.Success(data = restrictionPolicy.isHeadphoneEnabled(true))
+        return ApiResult.Success(data = restrictionPolicy.isHeadphoneEnabled(false))
     }
 }

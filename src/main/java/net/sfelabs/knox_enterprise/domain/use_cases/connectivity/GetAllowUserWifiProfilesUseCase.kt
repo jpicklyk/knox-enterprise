@@ -11,6 +11,6 @@ class GetAllowUserWifiProfilesUseCase : WithAndroidApplicationContext, Suspendin
     }
 
     override suspend fun execute(params: Unit): ApiResult<Boolean> {
-        return ApiResult.Success(data = wifiPolicy.getAllowUserProfiles(true))
+        return ApiResult.Success(data = wifiPolicy.getAllowUserProfiles(false))
     }
 }
