@@ -6,19 +6,20 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.IsWifiStateChangeAllowedUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.SetWifiStateChangeAllowedUseCase
 
 @PolicyDefinition(
-    title = "WiFi State Change Allowed",
-    description = "Allow or disallow the user from changing the WiFi on/off state.",
+    title = "Block WiFi State Change",
+    description = "When enabled, prevents users from changing the WiFi on/off state.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_WIFI,
         PolicyCapability.AFFECTS_CONNECTIVITY
     ]
 )
-class WifiStateChangeAllowedPolicy : BooleanStatePolicy() {
+class WifiStateChangeAllowedPolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = IsWifiStateChangeAllowedUseCase()
     private val setUseCase = SetWifiStateChangeAllowedUseCase()
 

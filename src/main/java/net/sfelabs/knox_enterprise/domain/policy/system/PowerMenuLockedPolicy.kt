@@ -5,19 +5,20 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.system.GetPowerMenuLockedStateUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.system.SetPowerMenuLockedStateUseCase
 
 @PolicyDefinition(
-    title = "Power Menu Locked",
-    description = "Lock or unlock the power menu options.",
+    title = "Lock Power Menu",
+    description = "When enabled, locks the power menu options.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_SECURITY,
         PolicyCapability.SECURITY_SENSITIVE
     ]
 )
-class PowerMenuLockedPolicy : BooleanStatePolicy() {
+class PowerMenuLockedPolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = GetPowerMenuLockedStateUseCase()
     private val setUseCase = SetPowerMenuLockedStateUseCase()
 

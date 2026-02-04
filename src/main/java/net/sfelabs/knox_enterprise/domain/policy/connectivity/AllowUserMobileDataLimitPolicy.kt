@@ -6,6 +6,7 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.AllowUserMobileDataLimitUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.IsUserMobileDataLimitAllowedUseCase
 
@@ -18,7 +19,7 @@ import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.IsUserMobileDat
         PolicyCapability.REQUIRES_SIM
     ]
 )
-class AllowUserMobileDataLimitPolicy : BooleanStatePolicy() {
+class AllowUserMobileDataLimitPolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = IsUserMobileDataLimitAllowedUseCase()
     private val setUseCase = AllowUserMobileDataLimitUseCase()
 

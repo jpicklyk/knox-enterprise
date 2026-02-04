@@ -6,6 +6,7 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.device.AllowShareListUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.device.IsShareListAllowedUseCase
 
@@ -15,10 +16,9 @@ import net.sfelabs.knox_enterprise.domain.use_cases.device.IsShareListAllowedUse
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_SECURITY,
-        PolicyCapability.EASILY_REVERSIBLE
     ]
 )
-class AllowShareListPolicy : BooleanStatePolicy() {
+class AllowShareListPolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = IsShareListAllowedUseCase()
     private val setUseCase = AllowShareListUseCase()
 

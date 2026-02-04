@@ -6,6 +6,7 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.AllowAndroidBeamUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.IsAndroidBeamAllowedUseCase
 
@@ -16,10 +17,9 @@ import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.IsAndroidBeamAl
     capabilities = [
         PolicyCapability.MODIFIES_NETWORK,
         PolicyCapability.AFFECTS_CONNECTIVITY,
-        PolicyCapability.EASILY_REVERSIBLE
     ]
 )
-class AllowAndroidBeamPolicy : BooleanStatePolicy() {
+class AllowAndroidBeamPolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = IsAndroidBeamAllowedUseCase()
     private val setUseCase = AllowAndroidBeamUseCase()
 

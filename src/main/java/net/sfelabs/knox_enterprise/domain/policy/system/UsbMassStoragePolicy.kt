@@ -5,12 +5,13 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.system.GetUsbMassStorageStateUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.system.SetUsbMassStorageStateUseCase
 
 @PolicyDefinition(
-    title = "USB Mass Storage",
-    description = "Enable or disable USB mass storage mode.",
+    title = "Disable USB Mass Storage",
+    description = "When enabled, disables USB mass storage mode.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_HARDWARE,
@@ -18,7 +19,7 @@ import net.sfelabs.knox_enterprise.domain.use_cases.system.SetUsbMassStorageStat
         PolicyCapability.STIG
     ]
 )
-class UsbMassStoragePolicy : BooleanStatePolicy() {
+class UsbMassStoragePolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = GetUsbMassStorageStateUseCase()
     private val setUseCase = SetUsbMassStorageStateUseCase()
 

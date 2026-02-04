@@ -6,12 +6,13 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.IsTetheringEnabledUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.SetTetheringEnabledUseCase
 
 @PolicyDefinition(
-    title = "Tethering Enabled",
-    description = "Enable or disable all tethering functionality on the device.",
+    title = "Disable Tethering",
+    description = "When enabled, disables all tethering functionality on the device.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_NETWORK,
@@ -19,7 +20,7 @@ import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.SetTetheringEna
         PolicyCapability.REQUIRES_SIM
     ]
 )
-class TetheringEnabledPolicy : BooleanStatePolicy() {
+class TetheringEnabledPolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = IsTetheringEnabledUseCase()
     private val setUseCase = SetTetheringEnabledUseCase()
 

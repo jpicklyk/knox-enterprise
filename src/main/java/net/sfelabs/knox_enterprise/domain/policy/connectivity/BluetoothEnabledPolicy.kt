@@ -6,21 +6,21 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.IsBluetoothEnabledUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.SetBluetoothEnabledUseCase
 
 @PolicyDefinition(
-    title = "Bluetooth Enabled",
-    description = "Enable or disable Bluetooth functionality on the device.",
+    title = "Disable Bluetooth",
+    description = "When enabled, disables Bluetooth functionality on the device.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_BLUETOOTH,
         PolicyCapability.AFFECTS_CONNECTIVITY,
-        PolicyCapability.EASILY_REVERSIBLE,
         PolicyCapability.STIG
     ]
 )
-class BluetoothEnabledPolicy : BooleanStatePolicy() {
+class BluetoothEnabledPolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = IsBluetoothEnabledUseCase()
     private val setUseCase = SetBluetoothEnabledUseCase()
 

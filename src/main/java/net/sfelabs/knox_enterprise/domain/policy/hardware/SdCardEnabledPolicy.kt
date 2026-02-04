@@ -6,12 +6,13 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.hardware.IsSdCardEnabledUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.hardware.SetSdCardEnabledUseCase
 
 @PolicyDefinition(
-    title = "SD Card Enabled",
-    description = "Enable or disable SD card access on the device.",
+    title = "Disable SD Card",
+    description = "When enabled, disables SD card access on the device.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_HARDWARE,
@@ -19,7 +20,7 @@ import net.sfelabs.knox_enterprise.domain.use_cases.hardware.SetSdCardEnabledUse
         PolicyCapability.STIG
     ]
 )
-class SdCardEnabledPolicy : BooleanStatePolicy() {
+class SdCardEnabledPolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = IsSdCardEnabledUseCase()
     private val setUseCase = SetSdCardEnabledUseCase()
 

@@ -14,7 +14,6 @@ import net.sfelabs.knox_enterprise.domain.use_cases.firewall.IsDomainFilterRepor
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_NETWORK,
-        PolicyCapability.EASILY_REVERSIBLE
     ]
 )
 class DomainFilterReportPolicy : BooleanStatePolicy() {

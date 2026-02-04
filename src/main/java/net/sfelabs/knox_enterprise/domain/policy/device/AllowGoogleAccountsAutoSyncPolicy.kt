@@ -6,6 +6,7 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.device.AllowGoogleAccountsAutoSyncUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.device.IsGoogleAccountsAutoSyncAllowedUseCase
 
@@ -18,7 +19,7 @@ import net.sfelabs.knox_enterprise.domain.use_cases.device.IsGoogleAccountsAutoS
         PolicyCapability.AFFECTS_BATTERY
     ]
 )
-class AllowGoogleAccountsAutoSyncPolicy : BooleanStatePolicy() {
+class AllowGoogleAccountsAutoSyncPolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = IsGoogleAccountsAutoSyncAllowedUseCase()
     private val setUseCase = AllowGoogleAccountsAutoSyncUseCase()
 

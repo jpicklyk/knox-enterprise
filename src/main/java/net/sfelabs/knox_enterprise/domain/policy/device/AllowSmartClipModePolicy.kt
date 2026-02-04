@@ -6,6 +6,7 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.device.AllowSmartClipModeUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.device.IsSmartClipModeAllowedUseCase
 
@@ -15,10 +16,9 @@ import net.sfelabs.knox_enterprise.domain.use_cases.device.IsSmartClipModeAllowe
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_HARDWARE,
-        PolicyCapability.EASILY_REVERSIBLE
     ]
 )
-class AllowSmartClipModePolicy : BooleanStatePolicy() {
+class AllowSmartClipModePolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = IsSmartClipModeAllowedUseCase()
     private val setUseCase = AllowSmartClipModeUseCase()
 

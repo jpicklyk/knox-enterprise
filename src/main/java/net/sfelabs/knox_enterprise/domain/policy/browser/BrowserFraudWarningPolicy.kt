@@ -5,6 +5,7 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.browser.GetForceFraudWarningSettingUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.browser.SetForceFraudWarningSettingUseCase
 
@@ -13,11 +14,11 @@ import net.sfelabs.knox_enterprise.domain.use_cases.browser.SetForceFraudWarning
     description = "Force fraud warnings in the Samsung Internet browser to protect users from malicious websites.",
     category = PolicyCategory.Toggle,
     capabilities = [
+        PolicyCapability.MODIFIES_BROWSER,
         PolicyCapability.MODIFIES_SECURITY,
-        PolicyCapability.EASILY_REVERSIBLE
     ]
 )
-class BrowserFraudWarningPolicy : BooleanStatePolicy() {
+class BrowserFraudWarningPolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = GetForceFraudWarningSettingUseCase()
     private val setUseCase = SetForceFraudWarningSettingUseCase()
 

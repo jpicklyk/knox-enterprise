@@ -6,6 +6,7 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.security.AllowLocalContactStorageUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.security.IsLocalContactStorageAllowedUseCase
 
@@ -18,7 +19,7 @@ import net.sfelabs.knox_enterprise.domain.use_cases.security.IsLocalContactStora
         PolicyCapability.SECURITY_SENSITIVE
     ]
 )
-class AllowLocalContactStoragePolicy : BooleanStatePolicy() {
+class AllowLocalContactStoragePolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = IsLocalContactStorageAllowedUseCase()
     private val setUseCase = AllowLocalContactStorageUseCase()
 

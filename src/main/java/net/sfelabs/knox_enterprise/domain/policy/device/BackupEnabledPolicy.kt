@@ -6,12 +6,13 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.device.IsBackupAllowedUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.device.SetBackupEnabledUseCase
 
 @PolicyDefinition(
-    title = "Backup Enabled",
-    description = "Enable or disable the backup functionality on the device.",
+    title = "Disable Backup",
+    description = "When enabled, disables the backup functionality on the device.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_SECURITY,
@@ -19,7 +20,7 @@ import net.sfelabs.knox_enterprise.domain.use_cases.device.SetBackupEnabledUseCa
         PolicyCapability.STIG
     ]
 )
-class BackupEnabledPolicy : BooleanStatePolicy() {
+class BackupEnabledPolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = IsBackupAllowedUseCase()
     private val setUseCase = SetBackupEnabledUseCase()
 

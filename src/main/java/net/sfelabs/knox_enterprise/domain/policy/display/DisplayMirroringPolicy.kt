@@ -15,7 +15,6 @@ import net.sfelabs.knox_enterprise.domain.use_cases.display.SetDisplayMirroringS
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_DISPLAY,
-        PolicyCapability.EASILY_REVERSIBLE
     ]
 )
 class DisplayMirroringPolicy : BooleanStatePolicy() {

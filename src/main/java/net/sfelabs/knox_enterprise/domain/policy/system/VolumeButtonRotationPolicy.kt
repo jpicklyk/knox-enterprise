@@ -15,7 +15,6 @@ import net.sfelabs.knox_enterprise.domain.use_cases.system.SetVolumeButtonRotati
     capabilities = [
         PolicyCapability.MODIFIES_HARDWARE,
         PolicyCapability.MODIFIES_DISPLAY,
-        PolicyCapability.EASILY_REVERSIBLE
     ]
 )
 class VolumeButtonRotationPolicy : BooleanStatePolicy() {

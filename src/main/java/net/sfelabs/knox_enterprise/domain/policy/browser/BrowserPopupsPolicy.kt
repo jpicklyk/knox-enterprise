@@ -5,19 +5,20 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.browser.GetPopupsSettingUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.browser.SetPopupsSettingUseCase
 
 @PolicyDefinition(
-    title = "Browser Popups",
-    description = "Allow or block popup windows in the Samsung Internet browser.",
+    title = "Block Browser Popups",
+    description = "When enabled, blocks popup windows in the Samsung Internet browser.",
     category = PolicyCategory.Toggle,
     capabilities = [
+        PolicyCapability.MODIFIES_BROWSER,
         PolicyCapability.MODIFIES_SECURITY,
-        PolicyCapability.EASILY_REVERSIBLE
     ]
 )
-class BrowserPopupsPolicy : BooleanStatePolicy() {
+class BrowserPopupsPolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = GetPopupsSettingUseCase()
     private val setUseCase = SetPopupsSettingUseCase()
 

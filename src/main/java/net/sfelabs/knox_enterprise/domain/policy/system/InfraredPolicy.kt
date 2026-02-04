@@ -14,7 +14,6 @@ import net.sfelabs.knox_enterprise.domain.use_cases.system.SetInfraredStateUseCa
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_HARDWARE,
-        PolicyCapability.EASILY_REVERSIBLE
     ]
 )
 class InfraredPolicy : BooleanStatePolicy() {

@@ -6,6 +6,7 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.AllowWifiScanningUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.IsWifiScanningAllowedUseCase
 
@@ -18,7 +19,7 @@ import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.IsWifiScanningA
         PolicyCapability.AFFECTS_CONNECTIVITY
     ]
 )
-class AllowWifiScanningPolicy : BooleanStatePolicy() {
+class AllowWifiScanningPolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = IsWifiScanningAllowedUseCase()
     private val setUseCase = AllowWifiScanningUseCase()
 

@@ -6,6 +6,7 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.device.AllowStatusBarExpansionUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.device.IsStatusBarExpansionAllowedUseCase
 
@@ -15,10 +16,9 @@ import net.sfelabs.knox_enterprise.domain.use_cases.device.IsStatusBarExpansionA
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_DISPLAY,
-        PolicyCapability.EASILY_REVERSIBLE
     ]
 )
-class AllowStatusBarExpansionPolicy : BooleanStatePolicy() {
+class AllowStatusBarExpansionPolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = IsStatusBarExpansionAllowedUseCase()
     private val setUseCase = AllowStatusBarExpansionUseCase()
 

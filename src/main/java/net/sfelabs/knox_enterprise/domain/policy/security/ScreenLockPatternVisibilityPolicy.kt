@@ -6,19 +6,20 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.security.IsScreenLockPatternVisibilityEnabledUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.security.SetScreenLockPatternVisibilityUseCase
 
 @PolicyDefinition(
-    title = "Screen Lock Pattern Visibility",
-    description = "Enable or disable showing the pattern trail when drawing the unlock pattern.",
+    title = "Hide Screen Lock Pattern",
+    description = "When enabled, hides the pattern trail when drawing the unlock pattern.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_SECURITY,
         PolicyCapability.MODIFIES_DISPLAY
     ]
 )
-class ScreenLockPatternVisibilityPolicy : BooleanStatePolicy() {
+class ScreenLockPatternVisibilityPolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = IsScreenLockPatternVisibilityEnabledUseCase()
     private val setUseCase = SetScreenLockPatternVisibilityUseCase()
 

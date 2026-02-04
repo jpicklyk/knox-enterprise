@@ -6,6 +6,7 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.device.AllowFactoryResetUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.device.IsFactoryResetAllowedUseCase
 
@@ -19,7 +20,7 @@ import net.sfelabs.knox_enterprise.domain.use_cases.device.IsFactoryResetAllowed
         PolicyCapability.PERSISTENT_ACROSS_REBOOT
     ]
 )
-class AllowFactoryResetPolicy : BooleanStatePolicy() {
+class AllowFactoryResetPolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = IsFactoryResetAllowedUseCase()
     private val setUseCase = AllowFactoryResetUseCase()
 

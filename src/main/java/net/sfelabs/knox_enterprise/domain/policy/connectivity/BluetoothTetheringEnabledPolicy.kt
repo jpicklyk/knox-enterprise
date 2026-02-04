@@ -6,19 +6,20 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.IsBluetoothTetheringEnabledUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.SetBluetoothTetheringEnabledUseCase
 
 @PolicyDefinition(
-    title = "Bluetooth Tethering Enabled",
-    description = "Enable or disable Bluetooth tethering functionality on the device.",
+    title = "Disable Bluetooth Tethering",
+    description = "When enabled, disables Bluetooth tethering functionality on the device.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_BLUETOOTH,
         PolicyCapability.AFFECTS_CONNECTIVITY
     ]
 )
-class BluetoothTetheringEnabledPolicy : BooleanStatePolicy() {
+class BluetoothTetheringEnabledPolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = IsBluetoothTetheringEnabledUseCase()
     private val setUseCase = SetBluetoothTetheringEnabledUseCase()
 

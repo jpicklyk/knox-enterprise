@@ -6,6 +6,7 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.media.AllowVideoRecordUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.media.IsVideoRecordAllowedUseCase
 
@@ -16,10 +17,9 @@ import net.sfelabs.knox_enterprise.domain.use_cases.media.IsVideoRecordAllowedUs
     capabilities = [
         PolicyCapability.MODIFIES_HARDWARE,
         PolicyCapability.SECURITY_SENSITIVE,
-        PolicyCapability.EASILY_REVERSIBLE
     ]
 )
-class AllowVideoRecordPolicy : BooleanStatePolicy() {
+class AllowVideoRecordPolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = IsVideoRecordAllowedUseCase()
     private val setUseCase = AllowVideoRecordUseCase()
 

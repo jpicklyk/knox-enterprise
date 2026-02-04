@@ -6,6 +6,7 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.hardware.AllowSDCardWriteUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.hardware.IsSDCardWriteAllowedUseCase
 
@@ -18,7 +19,7 @@ import net.sfelabs.knox_enterprise.domain.use_cases.hardware.IsSDCardWriteAllowe
         PolicyCapability.SECURITY_SENSITIVE
     ]
 )
-class AllowSDCardWritePolicy : BooleanStatePolicy() {
+class AllowSDCardWritePolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = IsSDCardWriteAllowedUseCase()
     private val setUseCase = AllowSDCardWriteUseCase()
 

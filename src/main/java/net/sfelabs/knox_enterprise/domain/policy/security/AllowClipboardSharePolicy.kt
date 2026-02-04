@@ -6,6 +6,7 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.security.AllowClipboardShareUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.security.IsClipboardShareAllowedUseCase
 
@@ -16,10 +17,9 @@ import net.sfelabs.knox_enterprise.domain.use_cases.security.IsClipboardShareAll
     capabilities = [
         PolicyCapability.MODIFIES_SECURITY,
         PolicyCapability.SECURITY_SENSITIVE,
-        PolicyCapability.EASILY_REVERSIBLE
     ]
 )
-class AllowClipboardSharePolicy : BooleanStatePolicy() {
+class AllowClipboardSharePolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = IsClipboardShareAllowedUseCase()
     private val setUseCase = AllowClipboardShareUseCase()
 

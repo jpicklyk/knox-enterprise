@@ -6,12 +6,13 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.IsBackgroundDataEnabledUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.SetBackgroundDataEnabledUseCase
 
 @PolicyDefinition(
-    title = "Background Data Enabled",
-    description = "Enable or disable background data usage for applications.",
+    title = "Disable Background Data",
+    description = "When enabled, disables background data usage for applications.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_NETWORK,
@@ -19,7 +20,7 @@ import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.SetBackgroundDa
         PolicyCapability.AFFECTS_CONNECTIVITY
     ]
 )
-class BackgroundDataEnabledPolicy : BooleanStatePolicy() {
+class BackgroundDataEnabledPolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = IsBackgroundDataEnabledUseCase()
     private val setUseCase = SetBackgroundDataEnabledUseCase()
 

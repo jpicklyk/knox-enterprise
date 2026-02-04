@@ -6,6 +6,7 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.telephony.AllowCallerIdDisplayUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.telephony.IsCallerIdDisplayAllowedUseCase
 
@@ -18,7 +19,7 @@ import net.sfelabs.knox_enterprise.domain.use_cases.telephony.IsCallerIdDisplayA
         PolicyCapability.MODIFIES_DISPLAY
     ]
 )
-class AllowCallerIdDisplayPolicy : BooleanStatePolicy() {
+class AllowCallerIdDisplayPolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = IsCallerIdDisplayAllowedUseCase()
     private val setUseCase = AllowCallerIdDisplayUseCase()
 

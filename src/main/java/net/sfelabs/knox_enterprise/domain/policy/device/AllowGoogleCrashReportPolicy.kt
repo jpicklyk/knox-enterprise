@@ -6,6 +6,7 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.device.AllowGoogleCrashReportUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.device.IsGoogleCrashReportAllowedUseCase
 
@@ -18,7 +19,7 @@ import net.sfelabs.knox_enterprise.domain.use_cases.device.IsGoogleCrashReportAl
         PolicyCapability.SECURITY_SENSITIVE
     ]
 )
-class AllowGoogleCrashReportPolicy : BooleanStatePolicy() {
+class AllowGoogleCrashReportPolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = IsGoogleCrashReportAllowedUseCase()
     private val setUseCase = AllowGoogleCrashReportUseCase()
 

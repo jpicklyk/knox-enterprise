@@ -15,7 +15,6 @@ import net.sfelabs.knox_enterprise.domain.use_cases.firewall.IsDomainFilterOnIpt
     capabilities = [
         PolicyCapability.MODIFIES_NETWORK,
         PolicyCapability.MODIFIES_SECURITY,
-        PolicyCapability.EASILY_REVERSIBLE
     ]
 )
 class DomainFilterOnIptablesPolicy : BooleanStatePolicy() {

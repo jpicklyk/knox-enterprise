@@ -6,6 +6,7 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.device.AllowIntelligenceOnlineProcessingUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.device.IsIntelligenceOnlineProcessingAllowedUseCase
 
@@ -27,7 +28,7 @@ import net.sfelabs.knox_enterprise.domain.use_cases.device.IsIntelligenceOnlineP
         PolicyCapability.STIG
     ]
 )
-class AllowIntelligenceOnlineProcessingPolicy : BooleanStatePolicy() {
+class AllowIntelligenceOnlineProcessingPolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = IsIntelligenceOnlineProcessingAllowedUseCase()
     private val setUseCase = AllowIntelligenceOnlineProcessingUseCase()
 

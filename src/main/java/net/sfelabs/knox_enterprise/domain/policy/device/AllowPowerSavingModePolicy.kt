@@ -6,6 +6,7 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.device.AllowPowerSavingModeUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.device.IsPowerSavingModeAllowedUseCase
 
@@ -16,10 +17,9 @@ import net.sfelabs.knox_enterprise.domain.use_cases.device.IsPowerSavingModeAllo
     capabilities = [
         PolicyCapability.MODIFIES_HARDWARE,
         PolicyCapability.AFFECTS_BATTERY,
-        PolicyCapability.EASILY_REVERSIBLE
     ]
 )
-class AllowPowerSavingModePolicy : BooleanStatePolicy() {
+class AllowPowerSavingModePolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = IsPowerSavingModeAllowedUseCase()
     private val setUseCase = AllowPowerSavingModeUseCase()
 

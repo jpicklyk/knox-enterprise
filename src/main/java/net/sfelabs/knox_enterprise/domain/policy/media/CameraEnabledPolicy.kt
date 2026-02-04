@@ -6,21 +6,21 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.media.IsCameraEnabledUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.media.SetCameraEnabledUseCase
 
 @PolicyDefinition(
-    title = "Camera Enabled",
-    description = "Enable or disable the device camera.",
+    title = "Disable Camera",
+    description = "When enabled, disables the device camera.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_HARDWARE,
         PolicyCapability.SECURITY_SENSITIVE,
-        PolicyCapability.EASILY_REVERSIBLE,
         PolicyCapability.STIG
     ]
 )
-class CameraEnabledPolicy : BooleanStatePolicy() {
+class CameraEnabledPolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = IsCameraEnabledUseCase()
     private val setUseCase = SetCameraEnabledUseCase()
 

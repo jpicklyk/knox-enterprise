@@ -6,12 +6,13 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.IsRoamingDataEnabledUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.SetRoamingDataUseCase
 
 @PolicyDefinition(
-    title = "Roaming Data Enabled",
-    description = "Enable or disable data roaming on the device.",
+    title = "Disable Roaming Data",
+    description = "When enabled, disables data roaming on the device.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_RADIO,
@@ -19,7 +20,7 @@ import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.SetRoamingDataU
         PolicyCapability.AFFECTS_CONNECTIVITY
     ]
 )
-class RoamingDataEnabledPolicy : BooleanStatePolicy() {
+class RoamingDataEnabledPolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = IsRoamingDataEnabledUseCase()
     private val setUseCase = SetRoamingDataUseCase()
 

@@ -6,12 +6,13 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.security.IsUsbDebuggingEnabledUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.security.SetUsbDebuggingEnabledUseCase
 
 @PolicyDefinition(
-    title = "USB Debugging Enabled",
-    description = "Enable or disable USB debugging (ADB) on the device.",
+    title = "Disable USB Debugging",
+    description = "When enabled, disables USB debugging (ADB) on the device.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_SECURITY,
@@ -19,7 +20,7 @@ import net.sfelabs.knox_enterprise.domain.use_cases.security.SetUsbDebuggingEnab
         PolicyCapability.STIG
     ]
 )
-class UsbDebuggingEnabledPolicy : BooleanStatePolicy() {
+class UsbDebuggingEnabledPolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = IsUsbDebuggingEnabledUseCase()
     private val setUseCase = SetUsbDebuggingEnabledUseCase()
 

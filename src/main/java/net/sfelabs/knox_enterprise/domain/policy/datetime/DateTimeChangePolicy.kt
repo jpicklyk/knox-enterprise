@@ -5,20 +5,20 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.datetime.AllowDateTimeChangeUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.datetime.IsDateTimeChangeAllowedUseCase
 
 @PolicyDefinition(
-    title = "Date/Time Change",
-    description = "Allow or disallow the user to change the device date and time.",
+    title = "Block Date/Time Change",
+    description = "When enabled, prevents users from changing the device date and time.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_SECURITY,
-        PolicyCapability.EASILY_REVERSIBLE,
         PolicyCapability.STIG
     ]
 )
-class DateTimeChangePolicy : BooleanStatePolicy() {
+class DateTimeChangePolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = IsDateTimeChangeAllowedUseCase()
     private val setUseCase = AllowDateTimeChangeUseCase()
 

@@ -6,6 +6,7 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.device.AllowDataSavingUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.device.IsDataSavingAllowedUseCase
 
@@ -18,7 +19,7 @@ import net.sfelabs.knox_enterprise.domain.use_cases.device.IsDataSavingAllowedUs
         PolicyCapability.AFFECTS_BATTERY
     ]
 )
-class AllowDataSavingPolicy : BooleanStatePolicy() {
+class AllowDataSavingPolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = IsDataSavingAllowedUseCase()
     private val setUseCase = AllowDataSavingUseCase()
 

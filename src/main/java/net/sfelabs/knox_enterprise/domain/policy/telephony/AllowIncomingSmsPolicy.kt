@@ -6,6 +6,7 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.telephony.AllowIncomingSmsUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.telephony.IsIncomingSmsAllowedUseCase
 
@@ -18,7 +19,7 @@ import net.sfelabs.knox_enterprise.domain.use_cases.telephony.IsIncomingSmsAllow
         PolicyCapability.REQUIRES_SIM
     ]
 )
-class AllowIncomingSmsPolicy : BooleanStatePolicy() {
+class AllowIncomingSmsPolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = IsIncomingSmsAllowedUseCase()
     private val setUseCase = AllowIncomingSmsUseCase()
 

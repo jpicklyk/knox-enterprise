@@ -5,20 +5,20 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.audio.GetVolumePanelEnabledStateUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.audio.SetVolumePanelEnabledStateUseCase
 
 @PolicyDefinition(
-    title = "Volume Panel",
-    description = "Enable or disable the system volume panel for adjusting audio settings.",
+    title = "Disable Volume Panel",
+    description = "When enabled, disables the system volume panel for adjusting audio settings.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_AUDIO,
         PolicyCapability.MODIFIES_DISPLAY,
-        PolicyCapability.EASILY_REVERSIBLE
     ]
 )
-class VolumePanelPolicy : BooleanStatePolicy() {
+class VolumePanelPolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = GetVolumePanelEnabledStateUseCase()
     private val setUseCase = SetVolumePanelEnabledStateUseCase()
 

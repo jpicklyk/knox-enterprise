@@ -15,7 +15,6 @@ import net.sfelabs.knox_enterprise.domain.use_cases.system.SetDeviceSpeakerEnabl
     capabilities = [
         PolicyCapability.MODIFIES_AUDIO,
         PolicyCapability.MODIFIES_HARDWARE,
-        PolicyCapability.EASILY_REVERSIBLE
     ]
 )
 class DeviceSpeakerEnabledPolicy : BooleanStatePolicy() {

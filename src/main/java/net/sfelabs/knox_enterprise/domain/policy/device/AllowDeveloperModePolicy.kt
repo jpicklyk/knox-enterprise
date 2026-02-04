@@ -6,6 +6,7 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.device.AllowDeveloperModeUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.device.IsDeveloperModeAllowedUseCase
 
@@ -19,7 +20,7 @@ import net.sfelabs.knox_enterprise.domain.use_cases.device.IsDeveloperModeAllowe
         PolicyCapability.STIG
     ]
 )
-class AllowDeveloperModePolicy : BooleanStatePolicy() {
+class AllowDeveloperModePolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = IsDeveloperModeAllowedUseCase()
     private val setUseCase = AllowDeveloperModeUseCase()
 

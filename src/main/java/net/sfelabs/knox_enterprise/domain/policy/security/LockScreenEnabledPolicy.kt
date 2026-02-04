@@ -6,12 +6,13 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.security.IsLockScreenEnabledUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.security.SetLockScreenEnabledUseCase
 
 @PolicyDefinition(
-    title = "Lock Screen Enabled",
-    description = "Enable or disable the lock screen on the device.",
+    title = "Disable Lock Screen",
+    description = "When enabled, disables the lock screen on the device.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_SECURITY,
@@ -19,7 +20,7 @@ import net.sfelabs.knox_enterprise.domain.use_cases.security.SetLockScreenEnable
         PolicyCapability.STIG
     ]
 )
-class LockScreenEnabledPolicy : BooleanStatePolicy() {
+class LockScreenEnabledPolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = IsLockScreenEnabledUseCase()
     private val setUseCase = SetLockScreenEnabledUseCase()
 

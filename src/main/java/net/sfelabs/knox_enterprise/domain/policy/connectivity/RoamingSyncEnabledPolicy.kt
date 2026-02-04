@@ -6,19 +6,20 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.IsRoamingSyncEnabledUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.SetRoamingSyncUseCase
 
 @PolicyDefinition(
-    title = "Roaming Sync Enabled",
-    description = "Enable or disable data synchronization while roaming.",
+    title = "Disable Roaming Sync",
+    description = "When enabled, disables data synchronization while roaming.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_NETWORK,
         PolicyCapability.REQUIRES_SIM
     ]
 )
-class RoamingSyncEnabledPolicy : BooleanStatePolicy() {
+class RoamingSyncEnabledPolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = IsRoamingSyncEnabledUseCase()
     private val setUseCase = SetRoamingSyncUseCase()
 

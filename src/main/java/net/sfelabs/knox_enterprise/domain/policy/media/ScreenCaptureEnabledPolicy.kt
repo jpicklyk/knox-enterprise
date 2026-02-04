@@ -6,20 +6,20 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.media.IsScreenCaptureEnabledUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.media.SetScreenCaptureEnabledUseCase
 
 @PolicyDefinition(
-    title = "Screen Capture Enabled",
-    description = "Enable or disable screen capture (screenshots) on the device.",
+    title = "Disable Screen Capture",
+    description = "When enabled, disables screen capture (screenshots) on the device.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_DISPLAY,
         PolicyCapability.SECURITY_SENSITIVE,
-        PolicyCapability.EASILY_REVERSIBLE
     ]
 )
-class ScreenCaptureEnabledPolicy : BooleanStatePolicy() {
+class ScreenCaptureEnabledPolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = IsScreenCaptureEnabledUseCase()
     private val setUseCase = SetScreenCaptureEnabledUseCase()
 

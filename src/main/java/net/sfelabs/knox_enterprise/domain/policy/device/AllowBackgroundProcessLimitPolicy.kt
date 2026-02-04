@@ -6,6 +6,7 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.device.AllowBackgroundProcessLimitUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.device.IsBackgroundProcessLimitAllowedUseCase
 
@@ -18,7 +19,7 @@ import net.sfelabs.knox_enterprise.domain.use_cases.device.IsBackgroundProcessLi
         PolicyCapability.AFFECTS_BATTERY
     ]
 )
-class AllowBackgroundProcessLimitPolicy : BooleanStatePolicy() {
+class AllowBackgroundProcessLimitPolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = IsBackgroundProcessLimitAllowedUseCase()
     private val setUseCase = AllowBackgroundProcessLimitUseCase()
 

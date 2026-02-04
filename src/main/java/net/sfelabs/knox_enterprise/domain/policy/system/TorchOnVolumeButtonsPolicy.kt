@@ -14,7 +14,6 @@ import net.sfelabs.knox_enterprise.domain.use_cases.system.SetTorchOnVolumeButto
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_HARDWARE,
-        PolicyCapability.EASILY_REVERSIBLE
     ]
 )
 class TorchOnVolumeButtonsPolicy : BooleanStatePolicy() {

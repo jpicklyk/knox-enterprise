@@ -14,7 +14,6 @@ import net.sfelabs.knox_enterprise.domain.use_cases.statusbar.SetScreenOffOnStat
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_DISPLAY,
-        PolicyCapability.EASILY_REVERSIBLE
     ]
 )
 class ScreenOffOnStatusBarDoubleTapPolicy : BooleanStatePolicy() {

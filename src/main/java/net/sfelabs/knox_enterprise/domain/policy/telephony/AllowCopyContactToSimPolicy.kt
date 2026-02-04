@@ -6,6 +6,7 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.telephony.AllowCopyContactToSimUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.telephony.IsCopyContactToSimAllowedUseCase
 
@@ -18,7 +19,7 @@ import net.sfelabs.knox_enterprise.domain.use_cases.telephony.IsCopyContactToSim
         PolicyCapability.REQUIRES_SIM
     ]
 )
-class AllowCopyContactToSimPolicy : BooleanStatePolicy() {
+class AllowCopyContactToSimPolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = IsCopyContactToSimAllowedUseCase()
     private val setUseCase = AllowCopyContactToSimUseCase()
 

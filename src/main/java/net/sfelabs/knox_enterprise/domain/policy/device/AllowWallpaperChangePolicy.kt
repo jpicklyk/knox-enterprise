@@ -6,6 +6,7 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.device.AllowWallpaperChangeUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.device.IsWallpaperChangeAllowedUseCase
 
@@ -15,10 +16,9 @@ import net.sfelabs.knox_enterprise.domain.use_cases.device.IsWallpaperChangeAllo
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_DISPLAY,
-        PolicyCapability.EASILY_REVERSIBLE
     ]
 )
-class AllowWallpaperChangePolicy : BooleanStatePolicy() {
+class AllowWallpaperChangePolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = IsWallpaperChangeAllowedUseCase()
     private val setUseCase = AllowWallpaperChangeUseCase()
 

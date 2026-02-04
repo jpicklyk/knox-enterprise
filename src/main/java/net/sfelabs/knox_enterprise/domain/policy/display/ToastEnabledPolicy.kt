@@ -6,19 +6,19 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.display.GetToastEnabledStateUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.display.SetToastEnabledStateUseCase
 
 @PolicyDefinition(
-    title = "Toast Notifications",
-    description = "Enable or disable toast notifications on the device.",
+    title = "Disable Toast Notifications",
+    description = "When enabled, disables toast notifications on the device.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_DISPLAY,
-        PolicyCapability.EASILY_REVERSIBLE
     ]
 )
-class ToastEnabledPolicy : BooleanStatePolicy() {
+class ToastEnabledPolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = GetToastEnabledStateUseCase()
     private val setUseCase = SetToastEnabledStateUseCase()
 

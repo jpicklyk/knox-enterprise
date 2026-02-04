@@ -6,19 +6,20 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.IsRoamingPushEnabledUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.SetRoamingPushUseCase
 
 @PolicyDefinition(
-    title = "Roaming Push Enabled",
-    description = "Enable or disable push notifications while roaming.",
+    title = "Disable Roaming Push",
+    description = "When enabled, disables push notifications while roaming.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_NETWORK,
         PolicyCapability.REQUIRES_SIM
     ]
 )
-class RoamingPushEnabledPolicy : BooleanStatePolicy() {
+class RoamingPushEnabledPolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = IsRoamingPushEnabledUseCase()
     private val setUseCase = SetRoamingPushUseCase()
 

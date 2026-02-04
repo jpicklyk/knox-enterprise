@@ -6,22 +6,22 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.media.IsMicrophoneEnabledUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.media.SetMicrophoneEnabledUseCase
 
 @PolicyDefinition(
-    title = "Microphone Enabled",
-    description = "Enable or disable the device microphone.",
+    title = "Disable Microphone",
+    description = "When enabled, disables the device microphone.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_HARDWARE,
         PolicyCapability.MODIFIES_AUDIO,
         PolicyCapability.SECURITY_SENSITIVE,
-        PolicyCapability.EASILY_REVERSIBLE,
         PolicyCapability.STIG
     ]
 )
-class MicrophoneEnabledPolicy : BooleanStatePolicy() {
+class MicrophoneEnabledPolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = IsMicrophoneEnabledUseCase()
     private val setUseCase = SetMicrophoneEnabledUseCase()
 

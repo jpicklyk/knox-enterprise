@@ -5,19 +5,20 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.browser.GetAutoFillSettingUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.browser.SetAutoFillSettingUseCase
 
 @PolicyDefinition(
-    title = "Browser Auto-Fill",
-    description = "Enable or disable form auto-fill in the Samsung Internet browser.",
+    title = "Disable Browser Auto-Fill",
+    description = "When enabled, disables form auto-fill in the Samsung Internet browser.",
     category = PolicyCategory.Toggle,
     capabilities = [
+        PolicyCapability.MODIFIES_BROWSER,
         PolicyCapability.MODIFIES_SECURITY,
-        PolicyCapability.EASILY_REVERSIBLE
     ]
 )
-class BrowserAutoFillPolicy : BooleanStatePolicy() {
+class BrowserAutoFillPolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = GetAutoFillSettingUseCase()
     private val setUseCase = SetAutoFillSettingUseCase()
 

@@ -5,19 +5,20 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.browser.GetJavaScriptSettingUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.browser.SetJavaScriptSettingUseCase
 
 @PolicyDefinition(
-    title = "Browser JavaScript",
-    description = "Enable or disable JavaScript execution in the Samsung Internet browser.",
+    title = "Disable Browser JavaScript",
+    description = "When enabled, disables JavaScript execution in the Samsung Internet browser.",
     category = PolicyCategory.Toggle,
     capabilities = [
+        PolicyCapability.MODIFIES_BROWSER,
         PolicyCapability.MODIFIES_SECURITY,
-        PolicyCapability.EASILY_REVERSIBLE
     ]
 )
-class BrowserJavaScriptPolicy : BooleanStatePolicy() {
+class BrowserJavaScriptPolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = GetJavaScriptSettingUseCase()
     private val setUseCase = SetJavaScriptSettingUseCase()
 

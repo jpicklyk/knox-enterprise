@@ -6,19 +6,20 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.hardware.IsHomeKeyEnabledUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.hardware.SetHomeKeyEnabledUseCase
 
 @PolicyDefinition(
-    title = "Home Key Enabled",
-    description = "Enable or disable the home key/button on the device.",
+    title = "Disable Home Key",
+    description = "When enabled, disables the home key/button on the device.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_HARDWARE,
         PolicyCapability.SECURITY_SENSITIVE
     ]
 )
-class HomeKeyEnabledPolicy : BooleanStatePolicy() {
+class HomeKeyEnabledPolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = IsHomeKeyEnabledUseCase()
     private val setUseCase = SetHomeKeyEnabledUseCase()
 

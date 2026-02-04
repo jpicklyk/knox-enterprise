@@ -6,6 +6,7 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.device.AllowStopSystemAppUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.device.IsStopSystemAppAllowedUseCase
 
@@ -17,7 +18,7 @@ import net.sfelabs.knox_enterprise.domain.use_cases.device.IsStopSystemAppAllowe
         PolicyCapability.MODIFIES_SECURITY
     ]
 )
-class AllowStopSystemAppPolicy : BooleanStatePolicy() {
+class AllowStopSystemAppPolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = IsStopSystemAppAllowedUseCase()
     private val setUseCase = AllowStopSystemAppUseCase()
 

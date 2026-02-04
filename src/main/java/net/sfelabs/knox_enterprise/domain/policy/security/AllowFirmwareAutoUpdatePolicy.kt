@@ -6,6 +6,7 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.security.AllowFirmwareAutoUpdateUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.security.IsFirmwareAutoUpdateAllowedUseCase
 
@@ -18,7 +19,7 @@ import net.sfelabs.knox_enterprise.domain.use_cases.security.IsFirmwareAutoUpdat
         PolicyCapability.PERSISTENT_ACROSS_REBOOT
     ]
 )
-class AllowFirmwareAutoUpdatePolicy : BooleanStatePolicy() {
+class AllowFirmwareAutoUpdatePolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = IsFirmwareAutoUpdateAllowedUseCase()
     private val setUseCase = AllowFirmwareAutoUpdateUseCase()
 

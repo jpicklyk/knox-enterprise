@@ -6,6 +6,7 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.device.AllowSafeModeUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.device.IsSafeModeAllowedUseCase
 
@@ -18,7 +19,7 @@ import net.sfelabs.knox_enterprise.domain.use_cases.device.IsSafeModeAllowedUseC
         PolicyCapability.SECURITY_SENSITIVE
     ]
 )
-class AllowSafeModePolicy : BooleanStatePolicy() {
+class AllowSafeModePolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = IsSafeModeAllowedUseCase()
     private val setUseCase = AllowSafeModeUseCase()
 

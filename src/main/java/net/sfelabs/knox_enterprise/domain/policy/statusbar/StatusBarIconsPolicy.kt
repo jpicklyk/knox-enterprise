@@ -5,19 +5,19 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.statusbar.GetStatusBarIconsStateUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.statusbar.SetStatusBarIconsStateUseCase
 
 @PolicyDefinition(
-    title = "Status Bar Icons",
-    description = "Show or hide icons in the status bar.",
+    title = "Hide Status Bar Icons",
+    description = "When enabled, hides icons in the status bar.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_DISPLAY,
-        PolicyCapability.EASILY_REVERSIBLE
     ]
 )
-class StatusBarIconsPolicy : BooleanStatePolicy() {
+class StatusBarIconsPolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = GetStatusBarIconsStateUseCase()
     private val setUseCase = SetStatusBarIconsStateUseCase()
 

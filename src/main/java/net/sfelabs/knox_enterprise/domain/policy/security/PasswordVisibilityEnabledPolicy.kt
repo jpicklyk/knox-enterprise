@@ -6,12 +6,13 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.security.IsPasswordVisibilityEnabledUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.security.SetPasswordVisibilityEnabledUseCase
 
 @PolicyDefinition(
-    title = "Password Visibility Enabled",
-    description = "Enable or disable showing password characters briefly while typing.",
+    title = "Disable Password Visibility",
+    description = "When enabled, hides password characters while typing (no brief reveal).",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_SECURITY,
@@ -19,7 +20,7 @@ import net.sfelabs.knox_enterprise.domain.use_cases.security.SetPasswordVisibili
         PolicyCapability.STIG
     ]
 )
-class PasswordVisibilityEnabledPolicy : BooleanStatePolicy() {
+class PasswordVisibilityEnabledPolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = IsPasswordVisibilityEnabledUseCase()
     private val setUseCase = SetPasswordVisibilityEnabledUseCase()
 

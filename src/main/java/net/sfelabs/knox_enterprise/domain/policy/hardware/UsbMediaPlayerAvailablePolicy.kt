@@ -6,19 +6,19 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.hardware.IsUsbMediaPlayerAvailableUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.hardware.SetUsbMediaPlayerAvailableUseCase
 
 @PolicyDefinition(
-    title = "USB Media Player Available",
-    description = "Enable or disable USB media player functionality.",
+    title = "Disable USB Media Player",
+    description = "When enabled, disables USB media player functionality.",
     category = PolicyCategory.Toggle,
     capabilities = [
         PolicyCapability.MODIFIES_HARDWARE,
-        PolicyCapability.EASILY_REVERSIBLE
     ]
 )
-class UsbMediaPlayerAvailablePolicy : BooleanStatePolicy() {
+class UsbMediaPlayerAvailablePolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = IsUsbMediaPlayerAvailableUseCase()
     private val setUseCase = SetUsbMediaPlayerAvailableUseCase()
 

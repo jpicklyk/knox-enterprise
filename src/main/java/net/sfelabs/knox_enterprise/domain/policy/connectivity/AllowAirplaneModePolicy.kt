@@ -6,6 +6,7 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.AllowAirplaneModeUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.IsAirplaneModeAllowedUseCase
 
@@ -16,10 +17,9 @@ import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.IsAirplaneModeA
     capabilities = [
         PolicyCapability.MODIFIES_RADIO,
         PolicyCapability.AFFECTS_CONNECTIVITY,
-        PolicyCapability.EASILY_REVERSIBLE
     ]
 )
-class AllowAirplaneModePolicy : BooleanStatePolicy() {
+class AllowAirplaneModePolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = IsAirplaneModeAllowedUseCase()
     private val setUseCase = AllowAirplaneModeUseCase()
 

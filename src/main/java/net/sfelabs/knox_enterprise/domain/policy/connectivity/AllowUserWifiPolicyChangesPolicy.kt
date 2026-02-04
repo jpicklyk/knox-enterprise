@@ -6,6 +6,7 @@ import net.sfelabs.knox.core.feature.annotation.PolicyDefinition
 import net.sfelabs.knox.core.feature.api.BooleanStatePolicy
 import net.sfelabs.knox.core.feature.api.PolicyCapability
 import net.sfelabs.knox.core.feature.api.PolicyCategory
+import net.sfelabs.knox.core.feature.api.StateMapping
 import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.GetAllowUserWifiPolicyChangesUseCase
 import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.SetAllowUserWifiPolicyChangesUseCase
 
@@ -18,7 +19,7 @@ import net.sfelabs.knox_enterprise.domain.use_cases.connectivity.SetAllowUserWif
         PolicyCapability.SECURITY_SENSITIVE
     ]
 )
-class AllowUserWifiPolicyChangesPolicy : BooleanStatePolicy() {
+class AllowUserWifiPolicyChangesPolicy : BooleanStatePolicy(StateMapping.INVERTED) {
     private val getUseCase = GetAllowUserWifiPolicyChangesUseCase()
     private val setUseCase = SetAllowUserWifiPolicyChangesUseCase()
 
