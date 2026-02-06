@@ -133,7 +133,7 @@ Annotate policies with relevant capabilities for filtering/grouping:
 
 ```kotlin
 PolicyCapability.MODIFIES_SECURITY    // Affects device security
-PolicyCapability.MODIFIES_CONNECTIVITY // Affects network/wireless
+PolicyCapability.AFFECTS_CONNECTIVITY // Affects network/wireless
 PolicyCapability.MODIFIES_AUDIO       // Affects sound
 PolicyCapability.MODIFIES_DISPLAY     // Affects screen
 PolicyCapability.SECURITY_SENSITIVE   // High-risk security change
