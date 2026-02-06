@@ -28,8 +28,7 @@ dependencies {
     implementation(projects.knoxCore.featureProcessor)
     implementation(libs.spongycastle.prov)
     implementation(libs.commons.lang)
-    // Knox SDK is compileOnly - consumers must provide their own SDK JAR
-    // This avoids conflicts when knox-tactical provides its Tactical SDK
+    // Knox SDK is compileOnly - consumers must provide their own SDK JAR at runtime
     compileOnly(files("libs/knoxsdk_ver38.jar"))
 
     ksp(projects.knoxCore.featureProcessor)
