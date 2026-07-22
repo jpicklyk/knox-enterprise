@@ -15,11 +15,12 @@ class ChangeSimPinCodeUseCase : WithAndroidApplicationContext, SuspendingUseCase
     }
 
     override suspend fun execute(params: Params): ApiResult<Boolean> {
-        return when (phoneRestrictionPolicy.changeSimPinCode(params.currentPin, params.newPin)) {
+        val code = phoneRestrictionPolicy.changeSimPinCode(params.currentPin, params.newPin)
+        return when (code) {
             PhoneRestrictionPolicy.ERROR_NONE -> ApiResult.Success(data = true)
-            PhoneRestrictionPolicy.ERROR_INVALID_INPUT -> ApiResult.Error(DefaultApiError.UnexpectedError("Invalid PIN code"))
-            PhoneRestrictionPolicy.ERROR_NOT_SUPPORTED -> ApiResult.Error(DefaultApiError.UnexpectedError("SIM PIN change not supported"))
-            else -> ApiResult.Error(DefaultApiError.UnexpectedError("Failed to change SIM PIN code"))
+            PhoneRestrictionPolicy.ERROR_NOT_SUPPORTED -> ApiResult.NotSupported
+            PhoneRestrictionPolicy.ERROR_INVALID_INPUT -> ApiResult.Error(DefaultApiError.InvalidInput("Invalid PIN code"))
+            else -> ApiResult.Error(DefaultApiError.UnexpectedError("Failed to change SIM PIN code, status $code"))
         }
     }
 }

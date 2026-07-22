@@ -3,7 +3,7 @@ package net.sfelabs.knox_enterprise.domain.use_cases.adb
 import com.samsung.android.knox.custom.CustomDeviceManager
 import net.sfelabs.knox.core.domain.usecase.base.SuspendingUseCase
 import net.sfelabs.knox.core.domain.usecase.model.ApiResult
-import net.sfelabs.knox.core.domain.usecase.model.DefaultApiError
+import net.sfelabs.knox_enterprise.domain.toKnoxApiResult
 
 /**
  * Use case to turn on or off the Android Debug Bridge.
@@ -11,21 +11,9 @@ import net.sfelabs.knox.core.domain.usecase.model.DefaultApiError
  * the app and stave it to a datastore
  */
 class SetAdbStateUseCase: SuspendingUseCase<Boolean, Boolean>() {
-    private val settingsManager = CustomDeviceManager.getInstance().settingsManager
+    private val settingsManager by lazy { CustomDeviceManager.getInstance().settingsManager }
 
     override suspend fun execute(params: Boolean): ApiResult<Boolean> {
-        return when (val result = settingsManager.setAdbState(params)) {
-            CustomDeviceManager.SUCCESS -> {
-                ApiResult.Success(data = params)
-            }
-
-            CustomDeviceManager.ERROR_POLICY_RESTRICTED -> {
-                ApiResult.Error(DefaultApiError.UnexpectedError("ERROR_POLICY_RESTRICTED: USB debugging has been disabled via API"))
-            }
-
-            else -> {
-                ApiResult.Error(DefaultApiError.UnexpectedError("An error occurred calling setAdbState: $result"))
-            }
-        }
+        return settingsManager.setAdbState(params).toKnoxApiResult("setAdbState") { params }
     }
 }

@@ -37,9 +37,7 @@ class AllowIntelligenceOnlineProcessingUseCase : WithAndroidApplicationContext, 
                 )
             }
         } catch (e: NoSuchMethodException) {
-            ApiResult.Error(
-                DefaultApiError.UnexpectedError("allowIntelligenceOnlineProcessing not available (requires Knox SDK API 37+)")
-            )
+            ApiResult.NotSupported
         } catch (e: Exception) {
             ApiResult.Error(
                 DefaultApiError.UnexpectedError("Failed to set intelligence online processing: ${e.message}")

@@ -3,7 +3,7 @@ package net.sfelabs.knox_enterprise.domain.use_cases.display
 import com.samsung.android.knox.custom.CustomDeviceManager
 import net.sfelabs.knox.core.domain.usecase.base.SuspendingUseCase
 import net.sfelabs.knox.core.domain.usecase.model.ApiResult
-import net.sfelabs.knox.core.domain.usecase.model.DefaultApiError
+import net.sfelabs.knox_enterprise.domain.toKnoxApiResult
 
 class SetDisplayMirroringStateUseCase : SuspendingUseCase<Boolean, Unit>() {
     private val systemManager by lazy {
@@ -11,9 +11,6 @@ class SetDisplayMirroringStateUseCase : SuspendingUseCase<Boolean, Unit>() {
     }
 
     override suspend fun execute(params: Boolean): ApiResult<Unit> {
-        return when (val result = systemManager.setDisplayMirroringState(params)) {
-            CustomDeviceManager.SUCCESS -> ApiResult.Success(Unit)
-            else -> ApiResult.Error(DefaultApiError.UnexpectedError("Failed to set display mirroring state: error code $result"))
-        }
+        return systemManager.setDisplayMirroringState(params).toKnoxApiResult("setDisplayMirroringState")
     }
 }

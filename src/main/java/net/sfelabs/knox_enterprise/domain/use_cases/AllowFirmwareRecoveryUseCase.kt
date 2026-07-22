@@ -7,8 +7,9 @@ import net.sfelabs.knox.core.domain.usecase.model.ApiResult
 import net.sfelabs.knox.core.domain.usecase.model.DefaultApiError
 
 class AllowFirmwareRecoveryUseCase: WithAndroidApplicationContext, SuspendingUseCase<Boolean, Boolean>() {
-    private val restrictionPolicy =
+    private val restrictionPolicy by lazy {
         EnterpriseDeviceManager.getInstance(applicationContext).restrictionPolicy
+    }
 
     override suspend fun execute(params: Boolean): ApiResult<Boolean> {
         return when (restrictionPolicy.allowFirmwareRecovery(params)) {

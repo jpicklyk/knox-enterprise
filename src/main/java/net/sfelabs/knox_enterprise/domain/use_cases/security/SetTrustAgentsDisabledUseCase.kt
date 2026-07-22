@@ -50,7 +50,7 @@ class SetTrustAgentsDisabledUseCase : WithAndroidApplicationContext,
             ApiResult.Success(data = params.disabled)
         } catch (e: SecurityException) {
             ApiResult.Error(
-                DefaultApiError.UnexpectedError("Failed to set trust agents disabled: ${e.message}")
+                DefaultApiError.PermissionError("Failed to set trust agents disabled: ${e.message}")
             )
         }
     }

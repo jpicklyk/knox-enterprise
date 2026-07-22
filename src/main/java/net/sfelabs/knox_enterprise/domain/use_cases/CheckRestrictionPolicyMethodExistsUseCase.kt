@@ -20,13 +20,13 @@ import net.sfelabs.knox.core.domain.usecase.model.ApiResult
 class CheckRestrictionPolicyMethodExistsUseCase : WithAndroidApplicationContext, SuspendingUseCase<String, Boolean>() {
 
     override suspend fun execute(params: String): ApiResult<Boolean> {
-        return try {
-            val restrictionPolicy = EnterpriseDeviceManager.getInstance(applicationContext).restrictionPolicy
-            val methods = restrictionPolicy.javaClass.methods
-            val exists = methods.any { it.name == params }
-            ApiResult.Success(exists)
-        } catch (e: Exception) {
-            ApiResult.Success(false)
-        }
+        // A genuinely absent method is reported as Success(false) via the normal path below
+        // (it simply won't appear in the enumerated method list). Any unexpected failure
+        // (e.g. Knox unavailable) is left to propagate to the base class's mapError so it
+        // isn't silently masked as "method absent".
+        val restrictionPolicy = EnterpriseDeviceManager.getInstance(applicationContext).restrictionPolicy
+        val methods = restrictionPolicy.javaClass.methods
+        val exists = methods.any { it.name == params }
+        return ApiResult.Success(exists)
     }
 }

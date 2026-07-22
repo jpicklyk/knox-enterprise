@@ -3,7 +3,7 @@ package net.sfelabs.knox_enterprise.domain.use_cases.system
 import com.samsung.android.knox.custom.CustomDeviceManager
 import net.sfelabs.knox.core.domain.usecase.base.SuspendingUseCase
 import net.sfelabs.knox.core.domain.usecase.model.ApiResult
-import net.sfelabs.knox.core.domain.usecase.model.DefaultApiError
+import net.sfelabs.knox_enterprise.domain.toKnoxApiResult
 
 class SetChargerConnectionSoundEnabledStateUseCase : SuspendingUseCase<Boolean, Unit>() {
     private val systemManager by lazy {
@@ -11,9 +11,7 @@ class SetChargerConnectionSoundEnabledStateUseCase : SuspendingUseCase<Boolean, 
     }
 
     override suspend fun execute(params: Boolean): ApiResult<Unit> {
-        return when (val result = systemManager.setChargerConnectionSoundEnabledState(params)) {
-            CustomDeviceManager.SUCCESS -> ApiResult.Success(Unit)
-            else -> ApiResult.Error(DefaultApiError.UnexpectedError("Failed to set charger connection sound state: error code $result"))
-        }
+        return systemManager.setChargerConnectionSoundEnabledState(params)
+            .toKnoxApiResult("setChargerConnectionSoundEnabledState")
     }
 }

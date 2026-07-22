@@ -7,8 +7,9 @@ import net.sfelabs.knox.core.domain.usecase.model.ApiResult
 import net.sfelabs.knox.core.domain.usecase.model.DefaultApiError
 
 class EnableAuditLogUseCase: WithAndroidApplicationContext, SuspendingUseCase<Unit, Boolean>() {
-    private val enterpriseKnoxManager = EnterpriseKnoxManager.getInstance(applicationContext)
-    private val auditLog = enterpriseKnoxManager.auditLogPolicy
+    private val auditLog by lazy {
+        EnterpriseKnoxManager.getInstance(applicationContext).auditLogPolicy
+    }
 
 
     override suspend fun execute(params: Unit): ApiResult<Boolean> {

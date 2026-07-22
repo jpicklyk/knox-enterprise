@@ -16,8 +16,9 @@ import kotlin.coroutines.resume
  * make an external call to a server.
  */
 class GetAttestationBlobUseCase: WithAndroidApplicationContext, SuspendingUseCase<String, ByteArray>() {
-    private val attestationPolicy =
+    private val attestationPolicy by lazy {
         EnterpriseKnoxManager.getInstance(applicationContext).enhancedAttestationPolicy
+    }
 
     override suspend fun execute(params: String): ApiResult<ByteArray> {
         return suspendCancellableCoroutine { continuation ->

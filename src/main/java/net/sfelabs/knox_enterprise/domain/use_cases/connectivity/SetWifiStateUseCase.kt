@@ -3,7 +3,7 @@ package net.sfelabs.knox_enterprise.domain.use_cases.connectivity
 import com.samsung.android.knox.custom.CustomDeviceManager
 import net.sfelabs.knox.core.domain.usecase.base.SuspendingUseCase
 import net.sfelabs.knox.core.domain.usecase.model.ApiResult
-import net.sfelabs.knox.core.domain.usecase.model.DefaultApiError
+import net.sfelabs.knox_enterprise.domain.toKnoxApiResult
 
 /**
  * Turns Wi-Fi on or off, optionally configuring a connection to an access point.
@@ -33,11 +33,7 @@ class SetWifiStateUseCase : SuspendingUseCase<SetWifiStateUseCase.Params, Unit>(
     ): ApiResult<Unit> = invoke(Params(state, ssid, username, password))
 
     override suspend fun execute(params: Params): ApiResult<Unit> {
-        return when (settingsManager.setWifiState(params.state, params.ssid, params.username, params.password)) {
-            CustomDeviceManager.SUCCESS -> ApiResult.Success(Unit)
-            else -> ApiResult.Error(
-                DefaultApiError.UnexpectedError("Failed to set WiFi state to ${params.state}")
-            )
-        }
+        return settingsManager.setWifiState(params.state, params.ssid, params.username, params.password)
+            .toKnoxApiResult("setWifiState")
     }
 }

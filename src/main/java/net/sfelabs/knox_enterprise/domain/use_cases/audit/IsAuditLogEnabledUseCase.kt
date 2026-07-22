@@ -6,8 +6,9 @@ import net.sfelabs.knox.core.domain.usecase.base.SuspendingUseCase
 import net.sfelabs.knox.core.domain.usecase.model.ApiResult
 
 class IsAuditLogEnabledUseCase : WithAndroidApplicationContext, SuspendingUseCase<Unit, Boolean>() {
-    private val enterpriseKnoxManager = EnterpriseKnoxManager.getInstance(applicationContext)
-    private val auditLog = enterpriseKnoxManager.auditLogPolicy
+    private val auditLog by lazy {
+        EnterpriseKnoxManager.getInstance(applicationContext).auditLogPolicy
+    }
 
 
     override suspend fun execute(params: Unit): ApiResult<Boolean> {

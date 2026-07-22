@@ -18,7 +18,9 @@ import java.util.Date
 import javax.security.auth.x500.X500Principal
 
 class KeyGeneratorUseCase: WithAndroidApplicationContext, SuspendingUseCase<Unit, Unit>() {
-    private val devicePolicyManager = this@KeyGeneratorUseCase.applicationContext.getSystemService(DevicePolicyManager::class.java)
+    private val devicePolicyManager by lazy {
+        applicationContext.getSystemService(DevicePolicyManager::class.java)
+    }
 
     @RequiresApi(Build.VERSION_CODES.S)
     private fun generateKey(): AttestedKeyPair? {

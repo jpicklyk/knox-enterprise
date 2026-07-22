@@ -34,7 +34,7 @@ class SetMinPasswordLengthUseCase : WithAndroidApplicationContext,
             ApiResult.Success(data = true)
         } catch (e: SecurityException) {
             ApiResult.Error(
-                DefaultApiError.UnexpectedError("Failed to set minimum password length: ${e.message}")
+                DefaultApiError.PermissionError("Failed to set minimum password length: ${e.message}")
             )
         }
     }

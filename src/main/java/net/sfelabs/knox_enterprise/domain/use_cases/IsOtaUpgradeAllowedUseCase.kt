@@ -6,8 +6,9 @@ import net.sfelabs.knox.core.domain.usecase.base.SuspendingUseCase
 import net.sfelabs.knox.core.domain.usecase.model.ApiResult
 
 class IsOtaUpgradeAllowedUseCase: WithAndroidApplicationContext, SuspendingUseCase<Unit, Boolean>() {
-    private val restrictionPolicy =
+    private val restrictionPolicy by lazy {
         EnterpriseDeviceManager.getInstance(applicationContext).restrictionPolicy
+    }
 
     override suspend fun execute(params: Unit): ApiResult<Boolean> {
         return ApiResult.Success(restrictionPolicy.isOTAUpgradeAllowed)

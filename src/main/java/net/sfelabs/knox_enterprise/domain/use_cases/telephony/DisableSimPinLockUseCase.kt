@@ -13,11 +13,12 @@ class DisableSimPinLockUseCase : WithAndroidApplicationContext, SuspendingUseCas
     }
 
     override suspend fun execute(params: String): ApiResult<Boolean> {
-        return when (phoneRestrictionPolicy.disableSimPinLock(params)) {
+        val code = phoneRestrictionPolicy.disableSimPinLock(params)
+        return when (code) {
             PhoneRestrictionPolicy.ERROR_NONE -> ApiResult.Success(data = true)
-            PhoneRestrictionPolicy.ERROR_INVALID_INPUT -> ApiResult.Error(DefaultApiError.UnexpectedError("Invalid PIN code"))
-            PhoneRestrictionPolicy.ERROR_NOT_SUPPORTED -> ApiResult.Error(DefaultApiError.UnexpectedError("SIM PIN lock not supported"))
-            else -> ApiResult.Error(DefaultApiError.UnexpectedError("Failed to disable SIM PIN lock"))
+            PhoneRestrictionPolicy.ERROR_NOT_SUPPORTED -> ApiResult.NotSupported
+            PhoneRestrictionPolicy.ERROR_INVALID_INPUT -> ApiResult.Error(DefaultApiError.InvalidInput("Invalid PIN code"))
+            else -> ApiResult.Error(DefaultApiError.UnexpectedError("Failed to disable SIM PIN lock, status $code"))
         }
     }
 }

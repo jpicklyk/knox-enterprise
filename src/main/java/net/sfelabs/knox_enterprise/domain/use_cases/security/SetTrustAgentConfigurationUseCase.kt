@@ -52,9 +52,7 @@ class SetTrustAgentConfigurationUseCase : WithAndroidApplicationContext,
             )
             ApiResult.Success(Unit)
         } catch (e: NoSuchMethodException) {
-            ApiResult.Error(
-                DefaultApiError.UnexpectedError("setTrustAgentConfiguration not available (requires Knox SDK API 27+)")
-            )
+            ApiResult.NotSupported
         } catch (e: Exception) {
             ApiResult.Error(
                 DefaultApiError.UnexpectedError("Failed to set trust agent configuration: ${e.message}")

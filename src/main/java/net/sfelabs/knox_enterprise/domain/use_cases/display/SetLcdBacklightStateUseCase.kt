@@ -3,7 +3,7 @@ package net.sfelabs.knox_enterprise.domain.use_cases.display
 import com.samsung.android.knox.custom.CustomDeviceManager
 import net.sfelabs.knox.core.domain.usecase.base.SuspendingUseCase
 import net.sfelabs.knox.core.domain.usecase.model.ApiResult
-import net.sfelabs.knox.core.domain.usecase.model.DefaultApiError
+import net.sfelabs.knox_enterprise.domain.toKnoxApiResult
 
 class SetLcdBacklightStateUseCase : SuspendingUseCase<Boolean, Unit>() {
     private val systemManager by lazy {
@@ -11,9 +11,6 @@ class SetLcdBacklightStateUseCase : SuspendingUseCase<Boolean, Unit>() {
     }
 
     override suspend fun execute(params: Boolean): ApiResult<Unit> {
-        return when (val result = systemManager.setLcdBacklightState(params)) {
-            CustomDeviceManager.SUCCESS -> ApiResult.Success(Unit)
-            else -> ApiResult.Error(DefaultApiError.UnexpectedError("Failed to set LCD backlight state: error code $result"))
-        }
+        return systemManager.setLcdBacklightState(params).toKnoxApiResult("setLcdBacklightState")
     }
 }

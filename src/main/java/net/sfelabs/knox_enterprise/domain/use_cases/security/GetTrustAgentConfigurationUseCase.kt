@@ -44,9 +44,7 @@ class GetTrustAgentConfigurationUseCase : WithAndroidApplicationContext,
             ) as? List<PersistableBundle>
             ApiResult.Success(data = configs ?: emptyList())
         } catch (e: NoSuchMethodException) {
-            ApiResult.Error(
-                DefaultApiError.UnexpectedError("getTrustAgentConfiguration not available (requires Knox SDK API 27+)")
-            )
+            ApiResult.NotSupported
         } catch (e: Exception) {
             ApiResult.Error(
                 DefaultApiError.UnexpectedError("Failed to get trust agent configuration: ${e.message}")

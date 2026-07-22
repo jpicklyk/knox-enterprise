@@ -6,8 +6,9 @@ import net.sfelabs.knox.core.domain.usecase.base.SuspendingUseCase
 import net.sfelabs.knox.core.domain.usecase.model.ApiResult
 
 class IsAttestationSupportedUseCase: WithAndroidApplicationContext, SuspendingUseCase<Unit, Boolean>() {
-    private val attestationPolicy =
+    private val attestationPolicy by lazy {
         EnterpriseKnoxManager.getInstance(applicationContext).enhancedAttestationPolicy
+    }
 
     override suspend fun execute(params: Unit): ApiResult<Boolean> {
         return ApiResult.Success(attestationPolicy.isSupported)

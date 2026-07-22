@@ -3,7 +3,7 @@ package net.sfelabs.knox_enterprise.domain.use_cases.statusbar
 import com.samsung.android.knox.custom.CustomDeviceManager
 import net.sfelabs.knox.core.domain.usecase.base.SuspendingUseCase
 import net.sfelabs.knox.core.domain.usecase.model.ApiResult
-import net.sfelabs.knox.core.domain.usecase.model.DefaultApiError
+import net.sfelabs.knox_enterprise.domain.toKnoxApiResult
 
 /**
  * Set quick panel buttons configuration.
@@ -15,9 +15,7 @@ class SetQuickPanelButtonsUseCase : SuspendingUseCase<Int, Unit>() {
     }
 
     override suspend fun execute(params: Int): ApiResult<Unit> {
-        return when (val result = systemManager.setQuickPanelButtons(params)) {
-            CustomDeviceManager.SUCCESS -> ApiResult.Success(Unit)
-            else -> ApiResult.Error(DefaultApiError.UnexpectedError("Failed to set quick panel buttons: error code $result"))
-        }
+        return systemManager.setQuickPanelButtons(params)
+            .toKnoxApiResult("setQuickPanelButtons")
     }
 }

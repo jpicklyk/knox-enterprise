@@ -3,7 +3,7 @@ package net.sfelabs.knox_enterprise.domain.use_cases.system
 import com.samsung.android.knox.custom.CustomDeviceManager
 import net.sfelabs.knox.core.domain.usecase.base.SuspendingUseCase
 import net.sfelabs.knox.core.domain.usecase.model.ApiResult
-import net.sfelabs.knox.core.domain.usecase.model.DefaultApiError
+import net.sfelabs.knox_enterprise.domain.toKnoxApiResult
 
 /**
  * Set force auto startup state.
@@ -15,9 +15,7 @@ class SetForceAutoStartUpStateUseCase : SuspendingUseCase<Int, Unit>() {
     }
 
     override suspend fun execute(params: Int): ApiResult<Unit> {
-        return when (val result = systemManager.setForceAutoStartUpState(params)) {
-            CustomDeviceManager.SUCCESS -> ApiResult.Success(Unit)
-            else -> ApiResult.Error(DefaultApiError.UnexpectedError("Failed to set force auto startup state: error code $result"))
-        }
+        return systemManager.setForceAutoStartUpState(params)
+            .toKnoxApiResult("setForceAutoStartUpState")
     }
 }

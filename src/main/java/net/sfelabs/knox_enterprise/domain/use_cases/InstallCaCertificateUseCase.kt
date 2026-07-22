@@ -17,7 +17,7 @@ class InstallCaCertificateUseCase: WithAndroidApplicationContext, SuspendingUseC
         val password: String
     )
 
-    private val enterpriseDeviceManager = EnterpriseDeviceManager.getInstance(applicationContext)
+    private val enterpriseDeviceManager by lazy { EnterpriseDeviceManager.getInstance(applicationContext) }
 
     suspend operator fun invoke(
         keystore: TargetKeystore,

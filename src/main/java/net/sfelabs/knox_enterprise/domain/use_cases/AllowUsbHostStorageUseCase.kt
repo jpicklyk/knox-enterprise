@@ -7,9 +7,9 @@ import net.sfelabs.knox.core.domain.usecase.model.ApiResult
 import net.sfelabs.knox.core.domain.usecase.model.DefaultApiError
 
 class AllowUsbHostStorageUseCase: WithAndroidApplicationContext, SuspendingUseCase<Boolean, Unit>() {
-    private val restrictionPolicy =
-        EnterpriseDeviceManager.getInstance(applicationContext)
-        .restrictionPolicy
+    private val restrictionPolicy by lazy {
+        EnterpriseDeviceManager.getInstance(applicationContext).restrictionPolicy
+    }
 
     override suspend fun execute(params: Boolean): ApiResult<Unit> {
         val result = restrictionPolicy.allowUsbHostStorage(params)

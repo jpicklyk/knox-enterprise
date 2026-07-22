@@ -27,9 +27,7 @@ class IsIntelligenceOnlineProcessingAllowedUseCase : WithAndroidApplicationConte
             val result = method.invoke(advancedRestrictionPolicy) as Boolean
             ApiResult.Success(data = result)
         } catch (e: NoSuchMethodException) {
-            ApiResult.Error(
-                DefaultApiError.UnexpectedError("isIntelligenceOnlineProcessingAllowed not available (requires Knox SDK API 37+)")
-            )
+            ApiResult.NotSupported
         } catch (e: Exception) {
             ApiResult.Error(
                 DefaultApiError.UnexpectedError("Failed to check intelligence online processing: ${e.message}")

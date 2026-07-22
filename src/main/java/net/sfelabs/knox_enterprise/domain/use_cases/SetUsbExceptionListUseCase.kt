@@ -7,8 +7,9 @@ import net.sfelabs.knox.core.domain.usecase.model.ApiResult
 import net.sfelabs.knox.core.domain.usecase.model.DefaultApiError
 
 class SetUsbExceptionListUseCase: WithAndroidApplicationContext, SuspendingUseCase<Int, Unit>() {
-    private val restrictionPolicy =
+    private val restrictionPolicy by lazy {
         EnterpriseDeviceManager.getInstance(applicationContext).restrictionPolicy
+    }
 
     override suspend fun execute(params: Int): ApiResult<Unit> {
         return if (restrictionPolicy.setUsbExceptionList(params))

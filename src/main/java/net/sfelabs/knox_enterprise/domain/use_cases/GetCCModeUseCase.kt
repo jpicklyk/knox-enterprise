@@ -6,8 +6,9 @@ import net.sfelabs.knox.core.domain.usecase.base.SuspendingUseCase
 import net.sfelabs.knox.core.domain.usecase.model.ApiResult
 
 class GetCCModeUseCase: WithAndroidApplicationContext, SuspendingUseCase<Unit, Int>() {
-    private val restrictionPolicy =
+    private val restrictionPolicy by lazy {
         EnterpriseKnoxManager.getInstance(applicationContext).advancedRestrictionPolicy
+    }
 
     override suspend fun execute(params: Unit): ApiResult<Int> {
         return ApiResult.Success(restrictionPolicy.ccModeState)

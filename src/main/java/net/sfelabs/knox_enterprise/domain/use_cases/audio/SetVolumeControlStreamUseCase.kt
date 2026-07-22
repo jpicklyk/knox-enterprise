@@ -3,7 +3,7 @@ package net.sfelabs.knox_enterprise.domain.use_cases.audio
 import com.samsung.android.knox.custom.CustomDeviceManager
 import net.sfelabs.knox.core.domain.usecase.base.SuspendingUseCase
 import net.sfelabs.knox.core.domain.usecase.model.ApiResult
-import net.sfelabs.knox.core.domain.usecase.model.DefaultApiError
+import net.sfelabs.knox_enterprise.domain.toKnoxApiResult
 
 /**
  * Set the volume control stream type.
@@ -15,9 +15,7 @@ class SetVolumeControlStreamUseCase : SuspendingUseCase<Int, Unit>() {
     }
 
     override suspend fun execute(params: Int): ApiResult<Unit> {
-        return when (val result = systemManager.setVolumeControlStream(params)) {
-            CustomDeviceManager.SUCCESS -> ApiResult.Success(Unit)
-            else -> ApiResult.Error(DefaultApiError.UnexpectedError("Failed to set volume control stream: error code $result"))
-        }
+        return systemManager.setVolumeControlStream(params)
+            .toKnoxApiResult("setVolumeControlStream")
     }
 }
