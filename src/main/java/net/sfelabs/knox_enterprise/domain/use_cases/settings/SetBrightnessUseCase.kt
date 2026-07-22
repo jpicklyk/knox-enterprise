@@ -17,7 +17,7 @@ class SetBrightnessUseCase: SuspendingUseCase<SetBrightnessUseCase.Params, Unit>
     override suspend fun execute(params: Params): ApiResult<Unit> {
         return if (!params.enable) {
             settingsManager.setBrightness(CustomDeviceManager.USE_AUTO)
-            ApiResult.Success(Unit)
+                .toKnoxApiResult("setBrightness(USE_AUTO)")
         } else {
             settingsManager.setBrightness(params.level).toKnoxApiResult("setBrightness")
         }
