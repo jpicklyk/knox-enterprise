@@ -21,9 +21,9 @@ ksp {
 dependencies {
     implementation(libs.androidx.annotation)
     implementation(libs.kotlinx.coroutines.core)
-    implementation(projects.knoxCore.usecaseExecutor)
-    implementation(projects.knoxCore.android)
-    implementation(projects.knoxCore.feature)
+    api(projects.knoxCore.usecaseExecutor)
+    api(projects.knoxCore.android)
+    api(projects.knoxCore.feature)
     implementation(projects.knoxCore.featureProcessor)
     implementation(libs.spongycastle.prov)
     implementation(libs.commons.lang)
