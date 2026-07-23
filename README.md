@@ -32,8 +32,8 @@ Use cases extend `SuspendingUseCase<P, R>` where `P` is the parameter type and `
 class GetBrightnessValueUseCase : SuspendingUseCase<Unit, Int>()
 
 // Single parameter - use the type directly
-class SetBrightnessUseCase : SuspendingUseCase<Int, Unit>()
-class SetAdbStateUseCase : SuspendingUseCase<Boolean, Unit>()
+class SetVolumeControlStreamUseCase : SuspendingUseCase<Int, Unit>()
+class SetAdbStateUseCase : SuspendingUseCase<Boolean, Boolean>()
 
 // Multiple parameters - use a nested data class
 class SetAutoRotationStateUseCase : SuspendingUseCase<SetAutoRotationStateUseCase.Params, Unit>() {
@@ -46,28 +46,28 @@ class SetAutoRotationStateUseCase : SuspendingUseCase<SetAutoRotationStateUseCas
 Use cases access Knox SDK managers via lazy initialization:
 
 ```kotlin
-class SetAdbStateUseCase : WithAndroidApplicationContext, SuspendingUseCase<Boolean, Unit>() {
+class SetAdbStateUseCase : SuspendingUseCase<Boolean, Boolean>() {
     // Lazy initialization of the Knox manager
-    private val restrictionPolicy by lazy {
-        EnterpriseDeviceManager.getInstance(applicationContext).restrictionPolicy
+    private val settingsManager by lazy {
+        CustomDeviceManager.getInstance().settingsManager
     }
 
-    override suspend fun execute(params: Boolean): ApiResult<Unit> {
-        restrictionPolicy.setAdbEnabled(params)
-        return ApiResult.Success(Unit)
+    override suspend fun execute(params: Boolean): ApiResult<Boolean> {
+        return settingsManager.setAdbState(params).toKnoxApiResult("setAdbState") { params }
     }
 }
 ```
 
-For APIs that return error codes, the use case maps them to `ApiResult`:
+Knox `CustomDeviceManager` APIs report success/failure as `int` status codes. Instead of a
+hand-rolled `when` in each use case, the module maps them centrally through an internal
+`Int.toKnoxApiResult(operation)` extension, producing typed results:
 
 ```kotlin
-override suspend fun execute(params: Boolean): ApiResult<Unit> {
-    return when (val result = systemManager.setSomeState(params)) {
-        CustomDeviceManager.SUCCESS -> ApiResult.Success(Unit)
-        else -> ApiResult.Error(DefaultApiError.UnexpectedError("Failed: error code $result"))
-    }
-}
+// SUCCESS                 -> ApiResult.Success
+// ERROR_NOT_SUPPORTED     -> ApiResult.NotSupported
+// ERROR_POLICY_RESTRICTED -> ApiResult.Error(DefaultApiError.PolicyRestricted)
+// ERROR_INVALID_VALUE     -> ApiResult.Error(DefaultApiError.InvalidInput)
+return systemManager.setSomeState(params).toKnoxApiResult("setSomeState")
 ```
 
 ## Features
@@ -147,14 +147,14 @@ Use cases can be instantiated directly without dependency injection:
 val result = SetAdbStateUseCase().invoke(enabled = true)
 when (result) {
     is ApiResult.Success -> println("ADB state changed")
-    is ApiResult.Error -> println("Error: ${result.error.message}")
+    is ApiResult.Error -> println("Error: ${result.apiError.message}")
 }
 
 // Get screen brightness
 val brightness = GetBrightnessValueUseCase().invoke(Unit)
 
 // Set screen brightness
-val result = SetBrightnessUseCase().invoke(brightness = 128)
+val result = SetBrightnessUseCase().invoke(enable = true, level = 128)
 
 // Check CC Mode status
 val ccMode = GetCCModeUseCase().invoke(Unit)
@@ -164,8 +164,11 @@ val result = SetMobileDataStateUseCase().invoke(enabled = true)
 
 // Install CA certificate
 val result = InstallCaCertificateUseCase().invoke(
-    certificateData = certBytes,
-    alias = "my-ca-cert"
+    keystore = TargetKeystore.Default,
+    certificateType = CertificateType.Cert,
+    data = certBytes,
+    alias = "my-ca-cert",
+    password = ""
 )
 ```
 
@@ -176,13 +179,10 @@ val result = InstallCaCertificateUseCase().invoke(
 val isSupported = IsAttestationSupportedUseCase().invoke(Unit)
 
 // Generate attestation key
-val keyResult = KeyGeneratorUseCase().invoke(keyAlias = "attestation-key")
+val keyResult = KeyGeneratorUseCase().invoke(Unit)
 
 // Get attestation blob
-val blobResult = GetAttestationBlobUseCase().invoke(
-    nonce = nonceBytes,
-    keyAlias = "attestation-key"
-)
+val blobResult = GetAttestationBlobUseCase().invoke("attestation-challenge")
 ```
 
 ### With Hilt (via knox-hilt)
@@ -202,24 +202,39 @@ dependencies {
 knox-enterprise exposes domain models to avoid SDK dependencies in consuming code:
 
 ```kotlin
-// CC Mode states
-enum class CCModeState {
-    DISABLED, ENABLED, ENFORCED
+// CC Mode states (Int constants mirroring Knox AdvancedRestrictionPolicy)
+object CCModeState {
+    const val READY = 2
+    const val ENABLED = 4
+    const val UNKNOWN = -1
 }
 
 // Certificate types
-enum class CertificateType {
-    CA, USER, VPN, WIFI
+sealed class CertificateType(val type: String) {
+    data object Cert : CertificateType("CERT")
+    data object Pkcs12 : CertificateType("PKCS12")
 }
 
 // Target keystore
-enum class TargetKeystore {
-    SYSTEM, USER, VPN, WIFI
+sealed class TargetKeystore(val value: Int) {
+    data object VpnAndApps : TargetKeystore(4)
+    data object Wifi : TargetKeystore(2)
+    data object Default : TargetKeystore(1)
 }
 
-// USB interface types
-enum class UsbInterface {
-    MTP, PTP, RNDIS, MIDI, MASS_STORAGE
+// USB interface class bitmask constants (for the USB exception list)
+object UsbInterface {
+    const val OFF = 0   // allow all
+    const val CDC = 1   // Communications Device Class (ethernet dongles)
+    const val MAS = 2   // Mass Storage
+    const val HID = 4   // Human Interface Device
+    const val AUD = 8   // Audio
+    const val VID = 16  // Video
+    const val PRT = 32  // Printer
+    const val WIR = 64  // Wireless controller
+    const val MIS = 128 // Miscellaneous
+    const val APP = 256 // Application specific
+    const val VEN = 512 // Vendor specific
 }
 ```
 
@@ -229,7 +244,7 @@ Use cases are organized by Knox SDK policy domain. For detailed API documentatio
 
 | Category | Package | Description |
 |----------|---------|-------------|
-| **Restrictions** | `restriction/` | Device restrictions (ADB, camera, clipboard, etc.) |
+| **Restrictions** | `adb/`, `system/`, `device/` | Device restrictions (ADB, USB mass storage, factory reset, etc.) |
 | **Connectivity** | `connectivity/` | Network controls (WiFi, Bluetooth, NFC, mobile data) |
 | **Telephony** | `telephony/` | Phone restrictions (SMS, calls, SIM PIN) |
 | **Display** | `display/` | Screen settings (brightness, backlight, rotation) |
@@ -293,9 +308,10 @@ The Knox Enterprise SDK JAR is included in the `libs/` directory:
 All use cases return `ApiResult` which is a sealed class:
 
 ```kotlin
-sealed class ApiResult<out T> {
-    data class Success<T>(val data: T) : ApiResult<T>()
-    data class Error(val error: ApiError) : ApiResult<Nothing>()
+sealed class ApiResult<out T : Any> {
+    data class Success<out T : Any>(val data: T) : ApiResult<T>()
+    data class Error(val apiError: ApiError, val exception: Exception? = null) : ApiResult<Nothing>()
+    data object NotSupported : ApiResult<Nothing>()
 }
 ```
 
@@ -307,7 +323,10 @@ when (val result = someUseCase.invoke(params)) {
         // Handle success with result.data
     }
     is ApiResult.Error -> {
-        // Handle error with result.error.message
+        // Handle error with result.apiError.message
+    }
+    ApiResult.NotSupported -> {
+        // Handle an API the device doesn't support
     }
 }
 ```

@@ -146,19 +146,32 @@ PolicyCapability.REQUIRES_REBOOT      // Change requires device restart
 Use cases access Knox managers via lazy initialization with `WithAndroidApplicationContext`:
 
 ```kotlin
-class SetAdbStateUseCase : WithAndroidApplicationContext, SuspendingUseCase<Boolean, Boolean>() {
+class AllowFirmwareRecoveryUseCase : WithAndroidApplicationContext, SuspendingUseCase<Boolean, Boolean>() {
     private val restrictionPolicy by lazy {
         EnterpriseDeviceManager.getInstance(applicationContext).restrictionPolicy
     }
 
     override suspend fun execute(params: Boolean): ApiResult<Boolean> {
-        return try {
-            restrictionPolicy.setAdbEnabled(params)
-            ApiResult.Success(params)
-        } catch (e: SecurityException) {
-            ApiResult.Error(DefaultApiError.PermissionError(e.message ?: "Permission denied"))
+        return when (restrictionPolicy.allowFirmwareRecovery(params)) {
+            true -> ApiResult.Success(data = params)
+            false -> ApiResult.Error(
+                DefaultApiError.UnexpectedError("Failure occurred applying API allowFirmwareRecovery($params)")
+            )
         }
     }
+}
+```
+
+Always use `by lazy` — eager initialization can throw during construction, before `invoke()`'s error mapping exists. Some Knox APIs (`CustomDeviceManager`) need no context and use the static `CustomDeviceManager.getInstance()` instead.
+
+For Knox APIs that return int status codes, use the internal `Int.toKnoxApiResult` mapper (`domain/KnoxStatusCode.kt`) so callers get typed errors:
+
+```kotlin
+class SetAdbStateUseCase : SuspendingUseCase<Boolean, Boolean>() {
+    private val settingsManager by lazy { CustomDeviceManager.getInstance().settingsManager }
+
+    override suspend fun execute(params: Boolean): ApiResult<Boolean> =
+        settingsManager.setAdbState(params).toKnoxApiResult("setAdbState") { params }
 }
 ```
 
