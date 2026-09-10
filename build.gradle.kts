@@ -25,7 +25,6 @@ dependencies {
     api(projects.knoxCore.android)
     api(projects.knoxCore.feature)
     implementation(projects.knoxCore.featureProcessor)
-    implementation(libs.spongycastle.prov)
     implementation(libs.commons.lang)
     // Knox SDK is compileOnly - consumers must provide their own SDK JAR at runtime
     compileOnly(files("libs/knoxsdk_ver38.jar"))
